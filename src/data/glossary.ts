@@ -328,4 +328,202 @@ export const glossary: GlossaryEntry[] = [
     whyItMatters:
       "Un refroidissement rapide réduit le risque d'infection et la formation de DMS. Sans refroidisseur, il faut utiliser un bain de glace (plus lent).",
   },
+  // ===== ENTRÉES SUPPLÉMENTAIRES =====
+  {
+    term: "Brassin",
+    fullName: "Brassin (Batch)",
+    category: "processus",
+    definition:
+      "La quantité de bière produite en une seule fois, exprimée en litres. Ex : un brassin de 20 L signifie que l'on brasse pour obtenir 20 litres finis.",
+    whyItMatters:
+      "La taille du brassin influence les quantités d'ingrédients, la gestion de l'équipement et l'échelle des pertes (trub, charbon actif).",
+    typicalValues: "5–30 L (amateur), 50–1000+ L (pro)",
+    example: "Brasser 20 L nécessite ~3–5 kg de malts selon la densité souhaitée.",
+  },
+  {
+    term: "Grist",
+    fullName: "Grist / Grain bill (Concassé)",
+    category: "ingredient",
+    definition:
+      "Mélange total des malts (et adjoints) que l'on utilise pour un brassin. Inclut le malt de base et les malts spéciaux.",
+    whyItMatters:
+      "Le grist détermine le profil de saveur, la couleur et la quantité de sucres disponibles pour la fermentation.",
+    example: "Grist pour une Pale Ale : 85% Pale Malt, 10% Crystal, 5% Munich.",
+  },
+  {
+    term: "Concassage",
+    fullName: "Concassage des grains (Crushing/Milling)",
+    category: "processus",
+    definition:
+      "Action de casser l'enveloppe du grain pour exposer l'endosperme amidonné tout en conservant des fragments de la balle (hull).",
+    whyItMatters:
+      "Un concassage trop fin bloque la filtration; trop grossier réduit l'extraction des sucres. Trouver le bon réglage est crucial.",
+    example: "Régler le moulin pour laisser des fragments de coque et une mouture uniforme.",
+  },
+  {
+    term: "Lauter / Décantation",
+    fullName: "Lautering (Lauter tun)",
+    category: "processus",
+    definition:
+      "Séparation du liquide sucré (moût) des résidus de grains après l'empâtage, généralement via un lauter-tun ou une cuve filtrante.",
+    whyItMatters:
+      "Permet d'extraire le maximum de sucres tout en gardant la filtration fluide; technique importante pour le rendement.",
+    example: "Recirculation initiale (vorlauf) jusqu'à clarification, puis récupération du moût clair.",
+  },
+  {
+    term: "Sparge",
+    fullName: "Sparging (Rinçage des grains)",
+    category: "processus",
+    definition:
+      "Rinçage des drêches avec de l'eau chaude pour extraire les sucres restants après empâtage. Se fait généralement par pulse, continu ou fly-sparge.",
+    whyItMatters:
+      "Le sparge augmente le rendement d'extraction. Mal réalisé, il peut extraire des tanins (goûts astringents).",
+    typicalValues: "Eau de sparge 75–78°C selon recette",
+  },
+  {
+    term: "Mash out",
+    fullName: "Mash out (Arrêt d'empâtage)",
+    category: "processus",
+    definition:
+      "Élévation de la température du mash à ~76–78°C juste avant le lautering pour arrêter l'activité enzymatique et fluidifier le moût.",
+    whyItMatters:
+      "Aide à réduire la viscosité et facilite le rinçage des drêches; stabilise la conversion des sucres.",
+  },
+  {
+    term: "Décantation / Trub",
+    fullName: "Trub (Dépôts après ébullition)",
+    category: "equipement",
+    definition:
+      "Dépôts de protéines coagulées, résidus de houblon et autres particules qui se forment pendant l'ébullition et sédimentent au fond de la marmite.",
+    whyItMatters:
+      "Éviter de transférer le trub dans le fermenteur réduit les défauts, mais garder un peu de trub peut aider la levure au départ.",
+  },
+  {
+    term: "Kettle / Marmite",
+    fullName: "Marmite d'ébullition (Brew Kettle)",
+    category: "equipement",
+    definition:
+      "Cuve où le moût est porté à ébullition et où on ajoute le houblon aux différents paliers.",
+    whyItMatters:
+      "La taille et la forme influencent la réduction (evaporation), l'extraction des houblons et la gestion des ébullitions vigoureuses.",
+  },
+  {
+    term: "Krausen",
+    fullName: "Krausen (mousse de fermentation)",
+    category: "processus",
+    definition:
+      "Mousse formée par l'activité de la levure pendant la fermentation primaire. Contient levure active et protéines.",
+    whyItMatters:
+      "Sa formation et sa chute donnent des indices sur la vigueur de la fermentation. Un krausen persistant peut être signe d'infection ou d'activité prolongée.",
+  },
+  {
+    term: "Krausening",
+    fullName: "Krausening (Référmentation naturelle)",
+    category: "processus",
+    definition:
+      "Technique de carbonatation consistant à ajouter du moût jeune et actif à une bière terminée pour relancer une refermentation propre en bouteille/fût.",
+    whyItMatters:
+      "Préférée par certains brasseurs pour une carbonatation plus propre que l'ajout de sucre sec.",
+  },
+  {
+    term: "Ensemencement",
+    fullName: "Pitching (Ensemencement de levure)",
+    category: "processus",
+    definition:
+      "Ajout de levure au moût refroidi. La quantité (pitching rate) et la vitalité de la levure déterminent la santé de la fermentation.",
+    whyItMatters:
+      "Sous-ensemencer peut provoquer des esters/faux-goûts; sur-ensemencer peut réduire la complexité. Le bon dosage est essentiel.",
+    example: "Pour ales: 0.75–1.5 million cellules/ml/°P; pour lagers: ~1.5–2.5M.",
+  },
+  {
+    term: "Starter",
+    fullName: "Starter de levure (Levain)",
+    category: "processus",
+    definition:
+      "Pré-culture de levure faite en faisant démarrer la levure dans un petit volume de moût (ou extrait) pour augmenter le nombre de cellules et leur vitalité avant l'ensemencement.",
+    whyItMatters:
+      "Permet d'ensemencer correctement de gros brassins ou des moûts à haute densité sans sous-ensemencer.",
+  },
+  {
+    term: "Oxygénation / Aération",
+    fullName: "Oxygénation / Aération du moût",
+    category: "processus",
+    definition:
+      "Introduction d'oxygène (ou d'air) dans le moût avant l'ensemencement pour permettre à la levure de se multiplier et d'effectuer une fermentation saine.",
+    whyItMatters:
+      "Insuffisamment d'oxygène = fermentation lente, production d'esters/faux-goûts; trop d'oxygène après fermentation = oxydation.",
+    example: "Aération par agitation vigoureuse 60–90s ou injection d'O₂ pure pendant 5–60s selon débit.",
+  },
+  {
+    term: "Floculation",
+    fullName: "Floculation (décantation de la levure)",
+    category: "processus",
+    definition:
+      "Tendance d'une souche de levure à s'agglomérer et retomber au fond du fermenteur après la fermentation.",
+    whyItMatters:
+      "Une floculation élevée facilite la clarification; une faible floculation peut nécessiter une filtration ou une clarification supplémentaire.",
+  },
+  {
+    term: "Cold crash",
+    fullName: "Cold Crash (Refroidissement brutal)",
+    category: "processus",
+    definition:
+      "Refroidissement rapide de la bière finie à basse température (0–4°C) pendant 24–72h pour faire chuter les particules en suspension et clarifier la bière.",
+    whyItMatters:
+      "Améliore la clarté et stabilise la bière avant l'embouteillage ou le conditionnement en fût.",
+  },
+  {
+    term: "Diacetyl rest",
+    fullName: "Diacetyl rest (Repos diacétyle)",
+    category: "processus",
+    definition:
+      "Élever légèrement la température en fin de fermentation (surtout pour lagers) pour permettre à la levure de réduire le diacétyle (goût de beurre).",
+    whyItMatters:
+      "Prévenir le goût beurré dans les lagers; souvent 1-3 jours à 18-20°C après fermentation principale.",
+  },
+  {
+    term: "Dextrines",
+    fullName: "Dextrines (sucres non fermentescibles)",
+    category: "ingredient",
+    definition:
+      "Sucres lourds non fermentescibles par la levure, apportant corps, rondeur et sensation de sucrosité en bouche.",
+    whyItMatters:
+      "La proportion de dextrines influence le 'body' et la tenue en bouche de la bière.",
+  },
+  {
+    term: "Adjoint",
+    fullName: "Adjoint / Adjunct",
+    category: "ingredient",
+    definition:
+      "Ingrédients autres que le malt (sucre, riz, maïs, fruits, épices) utilisés pour modifier la saveur, la couleur ou la teneur en alcool.",
+    whyItMatters:
+      "Permet d'ajuster le profil sans augmenter la proportion de malt de base; utilisés fréquemment en bières légères commerciales.",
+  },
+  {
+    term: "Décotion",
+    fullName: "Décotion (Decoction)",
+    category: "processus",
+    definition:
+      "Technique d'empâtage ancienne consistant à retirer une partie du mash, la porter à ébullition puis la réincorporer pour augmenter la température et extraire des saveurs torréfiées.",
+    whyItMatters:
+      "Donne des notes de malt plus complexes et une meilleure couleur pour certaines bières traditionnelles (Pilsner, Märzen).",
+  },
+  {
+    term: "Mouthfeel",
+    fullName: "Mouthfeel (Texture en bouche)",
+    category: "processus",
+    definition:
+      "Sensation tactile en bouche : corps, onctuosité, carbonatation et texture. Influencé par les dextrines, l'alcool et la carbonatation.",
+    whyItMatters:
+      "Détermine si la bière paraît légère, ronde, crémeuse ou aqueuse.",
+  },
+  {
+    term: "Head retention",
+    fullName: "Rétention de mousse (Head retention)",
+    category: "processus",
+    definition:
+      "Capacité de la bière à maintenir une mousse stable et persistante. Dépend des protéines du malt, des houblons et des pratiques de brassage.",
+    whyItMatters:
+      "La mousse influence l'aspect et la perception aromatique; une bonne rétention est souvent signe d'une bière bien faite.",
+  },
 ];
