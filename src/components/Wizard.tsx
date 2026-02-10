@@ -19,7 +19,8 @@ import Step5Mashing from "@/components/steps/Step5Mashing";
 import Step6Fermentation from "@/components/steps/Step6Fermentation";
 import Step7Conditioning from "@/components/steps/Step7Conditioning";
 import Step8Summary from "@/components/steps/Step8Summary";
-import { useState, useRef } from "react";
+import { hygieneChecklist } from "@/data/hygieneChecklist";
+import { useState, useRef, useMemo } from "react";
 
 /** Mapping étape → stepId pour la checklist d'hygiène */
 const stepIdMap: Record<number, string> = {
@@ -42,6 +43,18 @@ const steps = [
   Step8Summary,
 ];
 
+const STEP_NAMES = [
+  "Profil & Équipement",
+  "Paramètres",
+  "Malts & Céréales",
+  "Houblons",
+  "Levure",
+  "Empâtage & Ébullition",
+  "Fermentation",
+  "Conditionnement",
+  "Résumé",
+];
+
 // Variantes d'animation pour les transitions entre étapes
 const stepVariants = {
   enter: (direction: number) => ({
@@ -62,6 +75,7 @@ const stepVariants = {
  * Composant principal du wizard multi-étapes.
  * Intègre le toggle Débutant/Expert, le badge de risques, le lexique,
  * la checklist d'hygiène et le panneau d'estimations.
+ * Bloque la progression si les checkboxes d'hygiène ne sont pas cochées.
  */
 export default function Wizard() {
   const {
@@ -74,11 +88,55 @@ export default function Wizard() {
     setUiMode,
     showGlossary,
     setShowGlossary,
+    assistant,
+    recipe,
+    equipmentData,
   } = useRecipe();
   const [direction, setDirection] = useState(0);
   const prevStep = useRef(currentStep);
   const [showErrors, setShowErrors] = useState(false);
   const [showRiskPanel, setShowRiskPanel] = useState(false);
+  const [hygieneError, setHygieneError] = useState<string | null>(null);
+
+  /** Vérifie si tous les items d'hygiène de l'étape courante sont cochés */
+  const hygieneStatus = useMemo(() => {
+    const hygieneStepId = stepIdMap[currentStep];
+    if (!hygieneStepId) return { required: false, allChecked: true, total: 0, checked: 0 };
+
+    const stepChecklist = hygieneChecklist.find((s) => s.stepId === hygieneStepId);
+    if (!stepChecklist) return { required: false, allChecked: true, total: 0, checked: 0 };
+
+    // Filtrer les items selon l'état de la recette (même logique que HygieneChecklist)
+    const hasChiller = recipe.profile.selectedEquipment.some((id) => {
+      const eq = equipmentData.find((e) => e.id === id);
+      return eq?.category === "refroidissement";
+    });
+    const hasTempControl = recipe.profile.selectedEquipment.some((id) => {
+      const eq = equipmentData.find((e) => e.id === id);
+      return eq?.category === "température";
+    });
+    const packagingType = recipe.conditioning.mode;
+
+    const filteredItems = stepChecklist.items.filter((item) => {
+      if (!item.appliesWhen) return true;
+      const aw = item.appliesWhen;
+      if (aw.packagingType && aw.packagingType !== packagingType) return false;
+      if (aw.hasChiller !== undefined && aw.hasChiller !== hasChiller) return false;
+      if (aw.hasTempControl !== undefined && aw.hasTempControl !== hasTempControl) return false;
+      return true;
+    });
+
+    if (filteredItems.length === 0) return { required: false, allChecked: true, total: 0, checked: 0 };
+
+    const checkedCount = filteredItems.filter((item) => assistant.hygieneChecks[item.id]).length;
+
+    return {
+      required: true,
+      allChecked: checkedCount === filteredItems.length,
+      total: filteredItems.length,
+      checked: checkedCount,
+    };
+  }, [currentStep, assistant.hygieneChecks, recipe, equipmentData]);
 
   if (!dataLoaded) {
     return (
@@ -86,10 +144,13 @@ export default function Wizard() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center space-y-3"
+          className="text-center space-y-4"
         >
-          <div className="w-12 h-12 border-4 border-amber-300 border-t-amber-600 rounded-full animate-spin mx-auto" />
-          <p className="text-gray-600">Chargement des données...</p>
+          <div className="relative w-16 h-16 mx-auto">
+            <div className="w-16 h-16 border-4 border-amber-200 rounded-full" />
+            <div className="absolute inset-0 w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+          <p className="text-gray-500 font-medium">Chargement des données...</p>
         </motion.div>
       </div>
     );
@@ -106,17 +167,30 @@ export default function Wizard() {
     prevStep.current = currentStep;
     setCurrentStep(step);
     setShowErrors(false);
+    setHygieneError(null);
   }
 
   function handleNext() {
+    // Validation classique d'abord
     if (!isCurrentStepValid) {
       setShowErrors(true);
+      setHygieneError(null);
       return;
     }
+    // Validation hygiène ensuite
+    if (hygieneStatus.required && !hygieneStatus.allChecked) {
+      setHygieneError(
+        `Veuillez cocher tous les points d'hygiène avant de continuer (${hygieneStatus.checked}/${hygieneStatus.total} cochés).`
+      );
+      setShowErrors(false);
+      return;
+    }
+    setHygieneError(null);
     goTo(currentStep + 1);
   }
 
   function handlePrev() {
+    setHygieneError(null);
     goTo(currentStep - 1);
   }
 
@@ -126,41 +200,49 @@ export default function Wizard() {
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-4 no-print"
+        className="text-center mb-5 no-print"
       >
-        <h1 className="text-3xl sm:text-4xl font-bold text-amber-900">
-          ConcepteurBiere
-        </h1>
-        <p className="text-gray-500 text-sm mt-1">
-          Assistant de brassage de biere maison
+        <div className="inline-flex items-center gap-3 mb-1">
+          <span className="text-4xl">🍺</span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 bg-clip-text text-transparent">
+            ConcepteurBière
+          </h1>
+        </div>
+        <p className="text-gray-400 text-sm mt-1">
+          Créez votre recette de bière maison, étape par étape
         </p>
       </motion.header>
 
       {/* Barre d'outils : mode + risques + lexique */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-4 no-print">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        className="flex flex-wrap items-center justify-center gap-2 mb-4 no-print"
+      >
         {/* Toggle Débutant / Expert */}
-        <div className="flex items-center bg-white rounded-full border border-gray-200 overflow-hidden">
+        <div className="flex items-center bg-white rounded-full border border-gray-200 overflow-hidden shadow-sm">
           <button
             type="button"
             onClick={() => setUiMode("beginner")}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`px-4 py-2 text-xs font-semibold transition-all ${
               uiMode === "beginner"
-                ? "bg-amber-500 text-white"
-                : "text-gray-600 hover:bg-gray-50"
+                ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-inner"
+                : "text-gray-500 hover:bg-gray-50"
             }`}
           >
-            Débutant
+            🎓 Débutant
           </button>
           <button
             type="button"
             onClick={() => setUiMode("expert")}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`px-4 py-2 text-xs font-semibold transition-all ${
               uiMode === "expert"
-                ? "bg-amber-500 text-white"
-                : "text-gray-600 hover:bg-gray-50"
+                ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-inner"
+                : "text-gray-500 hover:bg-gray-50"
             }`}
           >
-            Expert
+            ⚡ Expert
           </button>
         </div>
 
@@ -171,12 +253,12 @@ export default function Wizard() {
         <button
           type="button"
           onClick={() => setShowGlossary(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-700 text-xs font-medium hover:bg-amber-200 transition-colors"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-semibold hover:bg-amber-50 hover:border-amber-200 hover:text-amber-700 transition-all shadow-sm"
         >
           <span>📖</span>
           <span>Lexique</span>
         </button>
-      </div>
+      </motion.div>
 
       {/* Indicateur d'étapes */}
       <StepIndicator />
@@ -194,48 +276,107 @@ export default function Wizard() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200 p-6 shadow-sm"
+              className="glass-card rounded-2xl p-6"
             >
+              {/* Step header */}
+              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-100">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white text-sm font-bold shadow-sm">
+                  {currentStep + 1}
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold text-gray-800">
+                    {STEP_NAMES[currentStep]}
+                  </h2>
+                  <p className="text-xs text-gray-400">
+                    Étape {currentStep + 1} sur {totalSteps}
+                  </p>
+                </div>
+              </div>
+
               <StepComponent />
 
               {/* Checklist d'hygiène pour cette étape */}
               {hygieneStepId && <HygieneChecklist stepId={hygieneStepId} />}
 
+              {/* Erreurs de validation */}
               {showErrors && !isCurrentStepValid && (
                 <ValidationErrors errors={currentValidation.errors} />
               )}
+
+              {/* Erreur hygiène */}
+              <AnimatePresence>
+                {hygieneError && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-4 p-3 bg-teal-50 border-2 border-teal-300 rounded-xl flex items-start gap-2"
+                  >
+                    <span className="text-teal-600 text-lg mt-0.5">🧹</span>
+                    <div>
+                      <p className="text-sm font-semibold text-teal-800">
+                        Points d'hygiène incomplets
+                      </p>
+                      <p className="text-xs text-teal-700 mt-0.5">
+                        {hygieneError}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </AnimatePresence>
 
           {/* Navigation */}
           <div className="flex justify-between items-center mt-6 no-print">
-            <button
+            <motion.button
               onClick={handlePrev}
               disabled={currentStep === 0}
-              className={`px-6 py-2.5 rounded-lg font-medium transition-all ${
+              whileHover={currentStep !== 0 ? { scale: 1.02 } : {}}
+              whileTap={currentStep !== 0 ? { scale: 0.98 } : {}}
+              className={`nav-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                 currentStep === 0
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+                  ? "bg-gray-100 text-gray-300 cursor-not-allowed"
+                  : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-sm"
               }`}
             >
-              Precedent
-            </button>
-            <span className="text-sm text-gray-400">
-              Etape {currentStep + 1} / {totalSteps}
-            </span>
-            <button
+              <span>←</span>
+              <span>Précédent</span>
+            </motion.button>
+
+            <div className="flex flex-col items-center">
+              <span className="text-xs text-gray-400 font-medium">
+                {currentStep + 1} / {totalSteps}
+              </span>
+              {hygieneStatus.required && (
+                <span
+                  className={`text-[10px] mt-0.5 font-medium ${
+                    hygieneStatus.allChecked ? "text-teal-500" : "text-teal-400"
+                  }`}
+                >
+                  🧹 {hygieneStatus.checked}/{hygieneStatus.total}
+                </span>
+              )}
+            </div>
+
+            <motion.button
               onClick={handleNext}
               disabled={currentStep === totalSteps - 1}
-              className={`px-6 py-2.5 rounded-lg font-medium transition-all ${
+              whileHover={currentStep !== totalSteps - 1 ? { scale: 1.02 } : {}}
+              whileTap={currentStep !== totalSteps - 1 ? { scale: 0.98 } : {}}
+              className={`nav-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                 currentStep === totalSteps - 1
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : !isCurrentStepValid
-                  ? "bg-amber-400 text-white cursor-pointer"
-                  : "bg-amber-600 text-white hover:bg-amber-700"
+                  ? "bg-gray-100 text-gray-300 cursor-not-allowed"
+                  : !isCurrentStepValid || (hygieneStatus.required && !hygieneStatus.allChecked)
+                  ? "bg-gradient-to-r from-amber-300 to-amber-400 text-white cursor-pointer shadow-sm"
+                  : "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-600 hover:to-amber-700 shadow-md shadow-amber-200"
               }`}
             >
-              {currentStep === totalSteps - 2 ? "Voir le resume" : "Suivant"}
-            </button>
+              <span>
+                {currentStep === totalSteps - 2 ? "Voir le résumé" : "Suivant"}
+              </span>
+              <span>→</span>
+            </motion.button>
           </div>
         </div>
 
