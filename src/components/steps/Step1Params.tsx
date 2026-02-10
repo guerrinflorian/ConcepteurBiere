@@ -1,6 +1,7 @@
 "use client";
 
 import { useRecipe } from "@/context/RecipeContext";
+import SearchableSelect from "@/components/ui/SearchableSelect";
 import Tip from "@/components/ui/Tip";
 import Tooltip from "@/components/ui/Tooltip";
 
@@ -24,7 +25,7 @@ export default function Step1Params() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-amber-900 mb-2">
-          Paramètres de base
+          <span className="text-3xl mr-2">⚙️</span>Paramètres de base
         </h2>
         <p className="text-gray-600">
           Définissez les paramètres généraux de votre brassin : le nom de votre recette,
@@ -49,7 +50,7 @@ export default function Step1Params() {
       {/* Volume */}
       <div>
         <label className="block text-sm font-semibold text-gray-700 mb-1">
-          Volume du brassin (litres)
+          📐 Volume du brassin (litres)
           <Tooltip text={tipsData.volume} />
         </label>
         <input
@@ -57,9 +58,9 @@ export default function Step1Params() {
           min={5}
           max={200}
           step={1}
-          value={params.volume}
+          value={params.volume || ""}
           onChange={(e) =>
-            updateParams({ volume: Math.max(1, Number(e.target.value)) })
+            updateParams({ volume: Number(e.target.value) })
           }
           className="w-32 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none"
         />
@@ -74,18 +75,15 @@ export default function Step1Params() {
           Style cible (optionnel)
           <Tooltip text={tipsData.style_target} />
         </label>
-        <select
+        <SearchableSelect
           value={params.styleId}
-          onChange={(e) => updateParams({ styleId: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none bg-white"
-        >
-          <option value="">— Aucun style particulier —</option>
-          {stylesData.map((style) => (
-            <option key={style.id} value={style.id}>
-              {style.name}
-            </option>
-          ))}
-        </select>
+          onChange={(val) => updateParams({ styleId: val })}
+          placeholder="— Aucun style particulier —"
+          options={stylesData.map((style) => ({
+            value: style.id,
+            label: style.name,
+          }))}
+        />
         {selectedStyle && (
           <div className="mt-2 p-3 bg-gray-50 rounded-lg text-sm text-gray-700">
             <p className="font-medium">{selectedStyle.name}</p>

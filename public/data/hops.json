@@ -158,5 +158,229 @@
     "type": "arôme",
     "description": "Houblon français aromatique. Notes de petits fruits rouges (fraise, framboise).",
     "origin": "France"
+  },
+  {
+    "id": "sorachi_ace",
+    "name": "Sorachi Ace",
+    "alpha_acid": 13.0,
+    "type": "arôme",
+    "description": "Houblon japonais. Arômes fruité et poivré avec agrumes intenses.",
+    "origin": "Japon"
+  },
+  {
+    "id": "wakatu",
+    "name": "Wakatu",
+    "alpha_acid": 6.5,
+    "type": "arôme",
+    "description": "Houblon néo-zélandais noble. Arômes herbacés, floraux et épicés.",
+    "origin": "Nouvelle-Zélande"
+  },
+  {
+    "id": "vic_secret",
+    "name": "Vic Secret",
+    "alpha_acid": 13.0,
+    "type": "arôme",
+    "description": "Houblon australien. Fruit de la passion intense, épices et bois.",
+    "origin": "Australie"
+  },
+  {
+    "id": "el_dorado",
+    "name": "El Dorado",
+    "alpha_acid": 14.0,
+    "type": "arôme",
+    "description": "Houblon américain. Arômes exotiques, papaye, agrumes et herbes.",
+    "origin": "USA"
+  },
+  {
+    "id": "azacca",
+    "name": "Azacca",
+    "alpha_acid": 15.0,
+    "type": "arôme",
+    "description": "Houblon américain. Arômes tropicaux intenses: mangue, lime, passion.",
+    "origin": "USA"
+  },
+  {
+    "id": "comet",
+    "name": "Comet",
+    "alpha_acid": 11.0,
+    "type": "mixte",
+    "description": "Houblon américain classique. Épicé avec agrumes nets et amertume médiane.",
+    "origin": "USA"
+  },
+  {
+    "id": "alchemy",
+    "name": "Alchemy",
+    "alpha_acid": 13.5,
+    "type": "arôme",
+    "description": "Houblon anglais moderne. Fruit tropical, herbes et terre.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "target",
+    "name": "Target",
+    "alpha_acid": 10.5,
+    "type": "mixte",
+    "description": "Houblon anglais. Boisé, herbacé et terreux. Amertume propre.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "challenger",
+    "name": "Challenger",
+    "alpha_acid": 7.5,
+    "type": "mixte",
+    "description": "Houblon anglais semi-aromatique. Notes de fruits et épices avec amertume modérée.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "goldings_uk",
+    "name": "Goldings (variante anglaise)",
+    "alpha_acid": 5.5,
+    "type": "arôme",
+    "description": "Version anglaise des Goldings. Arôme délicat, floral et légèrement fruité.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "spalt_select",
+    "name": "Spalt Select",
+    "alpha_acid": 6.0,
+    "type": "arôme",
+    "description": "Houblon noble allemand amélioré. Épicé, floral avec fruité subtil.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "mittelfruh",
+    "name": "Mittelfrüh",
+    "alpha_acid": 4.0,
+    "type": "arôme",
+    "description": "Variante classique du Hallertau. Noble allemand, épicé et floral.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "perle",
+    "name": "Perle",
+    "alpha_acid": 8.0,
+    "type": "mixte",
+    "description": "Houblon allemand semi-aromatique. Fruité, épice et résine.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "hersbrucker",
+    "name": "Hersbrucker",
+    "alpha_acid": 3.5,
+    "type": "arôme",
+    "description": "Houblon noble allemand. Herbacé, floral et délicatement d'épice.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "saphir",
+    "name": "Saphir",
+    "alpha_acid": 3.0,
+    "type": "arôme",
+    "description": "Houblon noble allemand nouvelle génération. Herbacé, léger et élégant.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "huell_melon",
+    "name": "Huell Melon",
+    "alpha_acid": 14.0,
+    "type": "arôme",
+    "description": "Houblon allemand moderne. Arômes de melon, fruits exotiques et fleur.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "polaris",
+    "name": "Polaris",
+    "alpha_acid": 16.0,
+    "type": "amérisant",
+    "description": "Houblon allemand haute amertume. Herbal et épices nets.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "belma",
+    "name": "Belma",
+    "alpha_acid": 10.0,
+    "type": "arôme",
+    "description": "Houblon belgique complexe. Agrumes, épices et herbes minérales.",
+    "origin": "Belgique"
+  },
+  {
+    "id": "brewers_gold",
+    "name": "Brewers Gold",
+    "alpha_acid": 8.5,
+    "type": "mixte",
+    "description": "Houblon britannique polyvalent. Notes épicées, boisées et pomme.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "sovereign",
+    "name": "Sovereign",
+    "alpha_acid": 6.5,
+    "type": "arôme",
+    "description": "Houblon anglais fruité. Pomme, poire avec fondant épicé.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "jester",
+    "name": "Jester",
+    "alpha_acid": 12.0,
+    "type": "arôme",
+    "description": "Houblon anglais moderne. Berry, agrumes avec amertume modérée.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "hallertau_aroma",
+    "name": "Hallertau Aroma",
+    "alpha_acid": 6.0,
+    "type": "arôme",
+    "description": "Hallertau amélioré pour plus d'arôme. Noble et floral.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "ekuanot",
+    "name": "Ekuanot (Equinox)",
+    "alpha_acid": 14.0,
+    "type": "arôme",
+    "description": "Houblon américain. Fleurs, épices, agrumes intenses.",
+    "origin": "USA"
+  },
+  {
+    "id": "cashmere",
+    "name": "Cashmere",
+    "alpha_acid": 10.0,
+    "type": "arôme",
+    "description": "Houblon américain. Doux, floral avec épice chaude.",
+    "origin": "USA"
+  },
+  {
+    "id": "apollo",
+    "name": "Apollo",
+    "alpha_acid": 17.0,
+    "type": "amérisant",
+    "description": "Houblon allemand à haute amertume. Résine, épice, propre.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "denali",
+    "name": "Denali",
+    "alpha_acid": 12.0,
+    "type": "arôme",
+    "description": "Houblon américain. Herbal, épices complexes et résine.",
+    "origin": "USA"
+  },
+  {
+    "id": "sabro",
+    "name": "Sabro",
+    "alpha_acid": 17.0,
+    "type": "arôme",
+    "description": "Houblon américain tropical. Noix de coco, herbe et épices.",
+    "origin": "USA"
+  },
+  {
+    "id": "loral",
+    "name": "Loral",
+    "alpha_acid": 14.0,
+    "type": "arôme",
+    "description": "Houblon américain délicat. Floral, agrumes subtils, épice.",
+    "origin": "USA"
   }
 ]

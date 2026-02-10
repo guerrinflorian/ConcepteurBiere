@@ -33,7 +33,7 @@ export default function Step6Fermentation() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-amber-900 mb-2">Fermentation</h2>
+        <h2 className="text-2xl font-bold text-amber-900 mb-2"><span className="text-3xl mr-2">🫧</span>Fermentation</h2>
         <p className="text-gray-600">
           Configurez les paramètres de fermentation. La température et la durée
           influencent directement le profil aromatique de votre bière.
@@ -92,10 +92,10 @@ export default function Step6Fermentation() {
           min={3}
           max={60}
           step={1}
-          value={fermentation.primaryDays}
+          value={fermentation.primaryDays || ""}
           onChange={(e) =>
             updateFermentation({
-              primaryDays: Math.max(1, Number(e.target.value)),
+              primaryDays: Number(e.target.value),
             })
           }
           className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none"
@@ -133,10 +133,10 @@ export default function Step6Fermentation() {
                 type="number"
                 min={3}
                 max={90}
-                value={fermentation.secondaryDays}
+                value={fermentation.secondaryDays || ""}
                 onChange={(e) =>
                   updateFermentation({
-                    secondaryDays: Math.max(1, Number(e.target.value)),
+                    secondaryDays: Number(e.target.value),
                   })
                 }
                 className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none text-sm"

@@ -55,6 +55,10 @@ body::before {
   background: linear-gradient(180deg, #b8860b, #92400e);
 }
 
+::-webkit-scrollbar:horizontal {
+  height: 4px;
+}
+
 /* Slider styling */
 input[type="range"] {
   height: 6px;

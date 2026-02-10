@@ -178,5 +178,212 @@
     "potential_gravity": 1.033,
     "description": "Abaisse le pH de l'empâtage. Utilisé à 1-5% pour ajuster l'acidité.",
     "origin": "Allemagne"
+  },
+  {
+    "id": "maris_otter",
+    "name": "Malt Maris Otter",
+    "type": "base",
+    "color_ebc": 4.5,
+    "potential_gravity": 1.039,
+    "description": "Malt de base anglais classique. Arôme complexe, légèrement fruité. Excellent pour les ales traditionnelles.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "optic",
+    "name": "Malt Optic",
+    "type": "base",
+    "color_ebc": 5,
+    "potential_gravity": 1.038,
+    "description": "Malt de base écossais moderne. Léger et disponible. Polyvalent pour ales.",
+    "origin": "Écosse"
+  },
+  {
+    "id": "pale_chocolate",
+    "name": "Malt Pale Chocolate",
+    "type": "cristal",
+    "color_ebc": 170,
+    "potential_gravity": 1.033,
+    "description": "Malt cristal chocolaté clair. Notes de chocolat doux et caramel.",
+    "origin": "USA"
+  },
+  {
+    "id": "crystal_40",
+    "name": "Crystal Malt 40L",
+    "type": "cristal",
+    "color_ebc": 55,
+    "potential_gravity": 1.034,
+    "description": "Malt cristal clair américain. Douceur et corps sans trop de couleur.",
+    "origin": "USA"
+  },
+  {
+    "id": "crystal_120",
+    "name": "Crystal Malt 120L",
+    "type": "cristal",
+    "color_ebc": 240,
+    "potential_gravity": 1.033,
+    "description": "Cristal foncé américain. Caramel prononcé, fruits noirs.",
+    "origin": "USA"
+  },
+  {
+    "id": "victory",
+    "name": "Malt Victory",
+    "type": "spécial",
+    "color_ebc": 75,
+    "potential_gravity": 1.034,
+    "description": "Malt spécialisé avec notes de pain grillé et biscuit. Peu cristallin.",
+    "origin": "USA"
+  },
+  {
+    "id": "rebius",
+    "name": "Malt Rebius",
+    "type": "spécial",
+    "color_ebc": 65,
+    "potential_gravity": 1.034,
+    "description": "Malt écossais spécialisé. Notes de caramel léger, pain grillé. Pour ales complexes.",
+    "origin": "Écosse"
+  },
+  {
+    "id": "flaked_corn",
+    "name": "Flocons de maïs",
+    "type": "adjunct",
+    "color_ebc": 0,
+    "potential_gravity": 1.034,
+    "description": "Maïs non-malteux. Apporte légèreté et croustillant. Idéal pour les Pale Lagers américaines.",
+    "origin": "USA"
+  },
+  {
+    "id": "flaked_rice",
+    "name": "Flocons de riz",
+    "type": "adjunct",
+    "color_ebc": 0,
+    "potential_gravity": 1.034,
+    "description": "Riz non-malteux. Encore plus légèr que le maïs. Pour lagers asiatiques.",
+    "origin": "Asie"
+  },
+  {
+    "id": "flaked_barley",
+    "name": "Flocons d'orge",
+    "type": "adjunct",
+    "color_ebc": 3,
+    "potential_gravity": 1.033,
+    "description": "Orge non-maltée floconnée. Apporte corps et tenue de mousse extensive.",
+    "origin": "Europe"
+  },
+  {
+    "id": "rye",
+    "name": "Malt de seigle",
+    "type": "base",
+    "color_ebc": 8,
+    "potential_gravity": 1.037,
+    "description": "Seigle maltè. Notes épicées et poivrées. 5-20% pour caractère complexe.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "rye_torrified",
+    "name": "Seigle torréfié",
+    "type": "torréfié",
+    "color_ebc": 70,
+    "potential_gravity": 1.032,
+    "description": "Seigle torréfié non-maltè. Saveurs épicées et légèrement fumées.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "spelt",
+    "name": "Malt d'épeautre",
+    "type": "base",
+    "color_ebc": 5,
+    "potential_gravity": 1.036,
+    "description": "Céréale ancienne, proche du blé. Arôme herbacé unique et complexe.",
+    "origin": "Europe"
+  },
+  {
+    "id": "dingemans_pale",
+    "name": "Malt Pale de Dingemans",
+    "type": "base",
+    "color_ebc": 7,
+    "potential_gravity": 1.038,
+    "description": "Malt de base belge de qualité supérieure. Plus d'arôme que Pilsner.",
+    "origin": "Belgique"
+  },
+  {
+    "id": "dingemans_aromatic",
+    "name": "Malt Aromatic de Dingemans",
+    "type": "spécial",
+    "color_ebc": 40,
+    "potential_gravity": 1.035,
+    "description": "Malt belge aromatique. Pain grillé intense et saveur maltée profonde.",
+    "origin": "Belgique"
+  },
+  {
+    "id": "abbey",
+    "name": "Malt Abbey",
+    "type": "cristal",
+    "color_ebc": 80,
+    "potential_gravity": 1.034,
+    "description": "Malt cristal belge. Caramel riche pour bières d'abbaye (Dubbels, Tripels).",
+    "origin": "Belgique"
+  },
+  {
+    "id": "honey_malt",
+    "name": "Malt Honey (Miel)",
+    "type": "cristal",
+    "color_ebc": 25,
+    "potential_gravity": 1.035,
+    "description": "Malt cristal avec saveur de miel et sucre. Apporte rondeur.",
+    "origin": "UK"
+  },
+  {
+    "id": "wheat_malt_european",
+    "name": "Malt de blé européen (Weizen)",
+    "type": "base",
+    "color_ebc": 4,
+    "potential_gravity": 1.037,
+    "description": "Blé maltè pour Weizen/Witbier. Protéines élevées = mousse stable.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "barley_flaked",
+    "name": "Orge floconnée (malté d'abord)",
+    "type": "adjunct",
+    "color_ebc": 3,
+    "potential_gravity": 1.033,
+    "description": "Orge maltée puis floconnée. Combine maltage et corps additionnel.",
+    "origin": "Europe"
+  },
+  {
+    "id": "cara_pils",
+    "name": "Cara-Pils (Crystal très clair)",
+    "type": "cristal",
+    "color_ebc": 15,
+    "potential_gravity": 1.034,
+    "description": "Très clair, presque pas de couleur. Améliore tenue de mousse et corps léger.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "peat_smoked",
+    "name": "Malt fumé à la tourbe (Peated)",
+    "type": "spécial",
+    "color_ebc": 25,
+    "potential_gravity": 1.036,
+    "description": "Malt fumé à la tourbe écossaise. Saveurs fumées et tourbées (Islay-like).",
+    "origin": "Écosse"
+  },
+  {
+    "id": "english_pale",
+    "name": "Malt English Pale",
+    "type": "base",
+    "color_ebc": 6,
+    "potential_gravity": 1.038,
+    "description": "Base anglaise légèrement plus colorée que Pilsner. Caractère biscuité subtil.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "cork_malt",
+    "name": "Malt Cork",
+    "type": "torréfié",
+    "color_ebc": 290,
+    "potential_gravity": 1.028,
+    "description": "Malt très foncé irlandais. Grillé et amer. Moins intense que le Black Malt.",
+    "origin": "Irlande"
   }
 ]

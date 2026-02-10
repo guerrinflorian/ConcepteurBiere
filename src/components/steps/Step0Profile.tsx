@@ -25,13 +25,13 @@ export default function Step0Profile() {
   );
 
   const categoryLabels: Record<string, string> = {
-    cuve: "Cuves & systèmes de brassage",
-    fermenteur: "Fermenteurs",
-    mesure: "Instruments de mesure",
-    refroidissement: "Refroidissement",
-    conditionnement: "Conditionnement",
-    accessoire: "Accessoires",
-    température: "Contrôle de température",
+    cuve: "🍲 Cuves & systèmes de brassage",
+    fermenteur: "🪣 Fermenteurs",
+    mesure: "📏 Instruments de mesure",
+    refroidissement: "❄️ Refroidissement",
+    conditionnement: "🍾 Conditionnement",
+    accessoire: "🔧 Accessoires",
+    température: "🌡️ Contrôle de température",
   };
 
   const categoryTipKeys: Record<string, string> = {
@@ -51,13 +51,34 @@ export default function Step0Profile() {
     }));
   }
 
+  const kettleVolumeMap: Record<string, number> = {
+    kettle_10: 8,
+    kettle_27: 20,
+    kettle_50: 35,
+    kettle_100: 70,
+    stockpot_large: 12,
+    brew_system: 20,
+    brew_kettle_electric: 20,
+  };
+
   function toggleEquipment(id: string) {
     setRecipe((prev) => {
       const selected = prev.profile.selectedEquipment;
-      const next = selected.includes(id)
-        ? selected.filter((e) => e !== id)
-        : [...selected, id];
-      return { ...prev, profile: { ...prev.profile, selectedEquipment: next } };
+      const isAdding = !selected.includes(id);
+      const next = isAdding
+        ? [...selected, id]
+        : selected.filter((e) => e !== id);
+
+      const updates: Partial<typeof prev> = {
+        profile: { ...prev.profile, selectedEquipment: next },
+      };
+
+      // Auto-set volume when selecting a kettle (only if volume is still at default 20)
+      if (isAdding && kettleVolumeMap[id] && prev.params.volume === 20) {
+        updates.params = { ...prev.params, volume: kettleVolumeMap[id] };
+      }
+
+      return { ...prev, ...updates };
     });
   }
 
@@ -75,7 +96,7 @@ export default function Step0Profile() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-amber-900 mb-2">
-          Profil & Matériel
+          <span className="text-3xl mr-2">🛠️</span>Profil & Matériel
         </h2>
         <p className="text-gray-600">
           Commencez par indiquer votre profil de brasseur et le matériel dont vous disposez.

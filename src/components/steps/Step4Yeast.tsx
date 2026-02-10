@@ -1,6 +1,7 @@
 "use client";
 
 import { useRecipe } from "@/context/RecipeContext";
+import SearchableSelect from "@/components/ui/SearchableSelect";
 import Tip from "@/components/ui/Tip";
 import Tooltip from "@/components/ui/Tooltip";
 
@@ -30,7 +31,7 @@ export default function Step4Yeast() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-amber-900 mb-2">
-          Ingrédients — Levure
+          <span className="text-3xl mr-2">🧫</span>Ingrédients — Levure
         </h2>
         <p className="text-gray-600">
           Choisissez la levure pour votre fermentation. La levure détermine
@@ -44,31 +45,17 @@ export default function Step4Yeast() {
         <label className="block text-sm font-semibold text-gray-700 mb-2">
           Levure :
         </label>
-        <select
+        <SearchableSelect
           value={recipe.yeastId}
-          onChange={(e) => handleYeastChange(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none bg-white"
-        >
-          <option value="">— Choisir une levure —</option>
-          <optgroup label="Levures Ale (fermentation haute)">
-            {yeastsData
-              .filter((y) => y.type === "ale")
-              .map((y) => (
-                <option key={y.id} value={y.id}>
-                  {y.name}
-                </option>
-              ))}
-          </optgroup>
-          <optgroup label="Levures Lager (fermentation basse)">
-            {yeastsData
-              .filter((y) => y.type === "lager")
-              .map((y) => (
-                <option key={y.id} value={y.id}>
-                  {y.name}
-                </option>
-              ))}
-          </optgroup>
-        </select>
+          onChange={(val) => handleYeastChange(val)}
+          placeholder="— Choisir une levure —"
+          grouped
+          options={yeastsData.map((y) => ({
+            value: y.id,
+            label: y.name,
+            group: y.type === "ale" ? "Levures Ale (fermentation haute)" : "Levures Lager (fermentation basse)",
+          }))}
+        />
       </div>
 
       {/* Caractéristiques de la levure sélectionnée */}

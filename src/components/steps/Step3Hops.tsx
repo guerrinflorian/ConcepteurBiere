@@ -3,6 +3,7 @@
 import { useRecipe } from "@/context/RecipeContext";
 import { HopAddition } from "@/lib/types";
 import { ibuToLabel } from "@/lib/calculations";
+import SearchableSelect from "@/components/ui/SearchableSelect";
 import Tip from "@/components/ui/Tip";
 import Tooltip from "@/components/ui/Tooltip";
 
@@ -49,7 +50,7 @@ export default function Step3Hops() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-amber-900 mb-2">
-          Ingrédients — Houblons
+          <span className="text-3xl mr-2">🌿</span>Ingrédients — Houblons
         </h2>
         <p className="text-gray-600">
           Ajoutez les houblons de votre recette. Le moment d&apos;ajout pendant l&apos;ébullition
@@ -71,20 +72,15 @@ export default function Step3Hops() {
                   <label className="block text-xs text-gray-500 mb-1">
                     Houblon #{index + 1}
                   </label>
-                  <select
+                  <SearchableSelect
                     value={addition.hopId}
-                    onChange={(e) =>
-                      updateHop(index, { hopId: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none bg-white text-sm"
-                  >
-                    <option value="">— Choisir un houblon —</option>
-                    {hopsData.map((h) => (
-                      <option key={h.id} value={h.id}>
-                        {h.name} ({h.alpha_acid}% AA – {h.type})
-                      </option>
-                    ))}
-                  </select>
+                    onChange={(val) => updateHop(index, { hopId: val })}
+                    placeholder="— Choisir un houblon —"
+                    options={hopsData.map((h) => ({
+                      value: h.id,
+                      label: `${h.name} (${h.alpha_acid}% AA – ${h.type})`,
+                    }))}
+                  />
                 </div>
                 <div className="w-28 flex-shrink-0">
                   <label className="block text-xs text-gray-500 mb-1">
@@ -98,7 +94,7 @@ export default function Step3Hops() {
                     value={addition.amount || ""}
                     onChange={(e) =>
                       updateHop(index, {
-                        amount: Math.max(0, Number(e.target.value)),
+                        amount: Number(e.target.value),
                       })
                     }
                     placeholder="g"

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRecipe } from "@/context/RecipeContext";
 import { MaltAddition, AdjunctAddition } from "@/lib/types";
-import { ebcToColorLabel } from "@/lib/calculations";
+import { ebcToColorLabel, ebcToColor } from "@/lib/calculations";
+import SearchableSelect from "@/components/ui/SearchableSelect";
 import Tip from "@/components/ui/Tip";
 import Tooltip from "@/components/ui/Tooltip";
 
@@ -77,7 +78,7 @@ export default function Step2Malts() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-amber-900 mb-2">
-          Ingrédients — Malts & Céréales
+          <span className="text-3xl mr-2">🌾</span>Ingrédients — Malts & Céréales
         </h2>
         <p className="text-gray-600">
           Ajoutez les malts et céréales de votre recette. Le malt de base constitue
@@ -101,20 +102,15 @@ export default function Step2Malts() {
                     Malt #{index + 1}
                     {index === 0 && <Tooltip text={tipsData.malt_base} />}
                   </label>
-                  <select
+                  <SearchableSelect
                     value={addition.maltId}
-                    onChange={(e) =>
-                      updateMalt(index, { maltId: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none bg-white text-sm"
-                  >
-                    <option value="">— Choisir un malt —</option>
-                    {maltsData.map((m) => (
-                      <option key={m.id} value={m.id}>
-                        {m.name} ({m.color_ebc} EBC – {m.type})
-                      </option>
-                    ))}
-                  </select>
+                    onChange={(val) => updateMalt(index, { maltId: val })}
+                    placeholder="— Choisir un malt —"
+                    options={maltsData.map((m) => ({
+                      value: m.id,
+                      label: `${m.name} (${m.color_ebc} EBC – ${m.type})`,
+                    }))}
+                  />
                 </div>
                 <div className="w-32 flex-shrink-0">
                   <label className="block text-xs text-gray-500 mb-1">
@@ -128,7 +124,7 @@ export default function Step2Malts() {
                     value={addition.amount || ""}
                     onChange={(e) =>
                       updateMalt(index, {
-                        amount: Math.max(0, Number(e.target.value)),
+                        amount: Number(e.target.value),
                       })
                     }
                     placeholder="kg"
@@ -146,9 +142,16 @@ export default function Step2Malts() {
                 )}
               </div>
               {selectedMalt && (
-                <p className="text-xs text-gray-500 italic pl-1">
-                  {selectedMalt.description}
-                </p>
+                <div className="flex items-center gap-2 pl-1">
+                  <span
+                    className="inline-block w-4 h-4 rounded-full border border-gray-300 flex-shrink-0"
+                    style={{ backgroundColor: ebcToColor(selectedMalt.color_ebc) }}
+                    title={`${selectedMalt.color_ebc} EBC`}
+                  />
+                  <p className="text-xs text-gray-500 italic">
+                    {selectedMalt.description}
+                  </p>
+                </div>
               )}
             </div>
           );
@@ -212,18 +215,15 @@ export default function Step2Malts() {
                       <label className="block text-xs text-gray-500 mb-1">
                         Adjuvant #{index + 1}
                       </label>
-                      <select
+                      <SearchableSelect
                         value={addition.adjunctId}
-                        onChange={(e) => updateAdjunct(index, { adjunctId: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none bg-white text-sm"
-                      >
-                        <option value="">— Choisir un adjuvant —</option>
-                        {adjunctsData.map((a) => (
-                          <option key={a.id} value={a.id}>
-                            {a.name} ({a.category})
-                          </option>
-                        ))}
-                      </select>
+                        onChange={(val) => updateAdjunct(index, { adjunctId: val })}
+                        placeholder="— Choisir un adjuvant —"
+                        options={adjunctsData.map((a) => ({
+                          value: a.id,
+                          label: `${a.name} (${a.category})`,
+                        }))}
+                      />
                     </div>
                     <div className="w-32 flex-shrink-0">
                       <label className="block text-xs text-gray-500 mb-1">
@@ -236,7 +236,7 @@ export default function Step2Malts() {
                         value={addition.amount || ""}
                         onChange={(e) =>
                           updateAdjunct(index, {
-                            amount: Math.max(0, Number(e.target.value)),
+                            amount: Number(e.target.value),
                           })
                         }
                         placeholder="kg"

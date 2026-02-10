@@ -39,8 +39,8 @@ export default function StepIndicator() {
       </div>
 
       {/* Step pills */}
-      <div className="overflow-x-auto">
-        <div className="flex items-center justify-center gap-1 min-w-max px-4">
+      <div className="overflow-x-auto overflow-y-hidden">
+        <div className="flex items-center justify-center gap-1 min-w-max px-4 py-1">
           {STEP_LABELS.map((label, i) => {
             const isActive = i === currentStep;
             const isDone = i < currentStep;

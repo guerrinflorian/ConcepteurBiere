@@ -31,7 +31,7 @@ export default function Step5Mashing() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-amber-900 mb-2">
-          Empâtage & Ébullition
+          <span className="text-3xl mr-2">🔥</span>Empâtage & Ébullition
         </h2>
         <p className="text-gray-600">
           Définissez la température d&apos;empâtage et la durée d&apos;ébullition. La température
@@ -82,10 +82,10 @@ export default function Step5Mashing() {
           min={30}
           max={120}
           step={5}
-          value={mashing.boilDuration}
+          value={mashing.boilDuration || ""}
           onChange={(e) =>
             updateMashing({
-              boilDuration: Math.max(15, Number(e.target.value)),
+              boilDuration: Number(e.target.value),
             })
           }
           className="w-32 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none"

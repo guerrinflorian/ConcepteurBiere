@@ -94,5 +94,253 @@
     "gravity_contribution": 1.0,
     "description": "Notes piquantes et épicées. Râper et ajouter en fin d'ébullition.",
     "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "cinnamon",
+    "name": "Cannelle (bâton ou poudre)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Notes douces et épicées. Ajouter en fin d'ébullition ou fermentation secondaire.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "clove",
+    "name": "Clou de girofle",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Notes chaudes et piquantes. À utiliser avec parcimonie (0.5-2 g par brassin).",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "anise",
+    "name": "Graines d'anis / Badiane",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Arômes d'anis et réglisse douces. Typiques pour les bières épicées belges.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "nutmeg",
+    "name": "Noix de muscade",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Notes chaudes et légèrement sucrées. Ajouter rarement en fin d'ébullition.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "pepper",
+    "name": "Poivre noir",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Piquant épicé. Pour les styles spéciaux ou bières belges fermières.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "chimay_spice",
+    "name": "Mélange d'épices pour trappiste",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Mélange traditionnel pour Dubbels et Tripels belges.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "sugar_white",
+    "name": "Sucre blanc de canne",
+    "category": "sucre",
+    "gravity_contribution": 1.046,
+    "description": "Sucre blanc raffiné, augmente l'alcool sans couleur ni saveur notable.",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "brown_sugar",
+    "name": "Cassonade / Sucre roux",
+    "category": "sucre",
+    "gravity_contribution": 1.044,
+    "description": "Sucre roux avec légères notes de mélasse et caramel.",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "muscovado",
+    "name": "Sucre muscovado",
+    "category": "sucre",
+    "gravity_contribution": 1.042,
+    "description": "Sucre très humide avec saveurs profondes de mélasse. Pour le caractère malteux.",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "corn_syrup",
+    "name": "Sirop de maïs",
+    "category": "sucre",
+    "gravity_contribution": 1.040,
+    "description": "Sirop de maïs, sucre fermentescible. Augmente l'alcool sans corps (adjunct).",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "maple_syrup",
+    "name": "Sirop d'érable",
+    "category": "sucre",
+    "gravity_contribution": 1.035,
+    "description": "Apporte des notes boisées et caramélisées. Ajouter en fin d'ébullition ou secondaire.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "agave",
+    "name": "Nectar d'agave",
+    "category": "sucre",
+    "gravity_contribution": 1.038,
+    "description": "Sucre léger avec arôme subtil. Ajouter en secondaire pour préserver l'arôme.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "cacao_nibs",
+    "name": "Nibs de cacao (fèves caféifiées broyées)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Fèves de cacao broyées, intense chocolat amer. Pour stouts et ales brunes.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "cocoa_powder",
+    "name": "Poudre de cacao (non sucrée)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Poudre de cacao pure, goût chocolat prononcé. À utiliser à 10-50 g par brassin.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "anise_hisop",
+    "name": "Hysope",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Herbe amère avec notes florales. Historiquement utilisée avant le houblon.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "mint_peppermint",
+    "name": "Menthe poivrée",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Arômes mentholés frais. Ajouter en fermentation secondaire pour volatilité.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "lavender",
+    "name": "Lavande",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Arômes floraux délicats. Pour les bières spécialisées. À utiliser légèrement.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "lemon_zest",
+    "name": "Zeste de citron frais",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Agrumes intenses. À ajouter en fermentation secondaire ou dry-hop.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "lime_zest",
+    "name": "Zeste de lime",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Agrumes acidulés. Pour les styles fruit ou épicés.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "strawberry",
+    "name": "Fraise (fraîche ou surgelée)",
+    "category": "fruit",
+    "gravity_contribution": 1.008,
+    "description": "Fruit rouge sucré. Ajouter 200-500g en secondaire pour la subtilité.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "blueberry",
+    "name": "Myrtille",
+    "category": "fruit",
+    "gravity_contribution": 1.008,
+    "description": "Fruit profond avec tanins légers. 300-500g pour 20L.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "blackberry",
+    "name": "Mûre",
+    "category": "fruit",
+    "gravity_contribution": 1.008,
+    "description": "Fruit intense avec tanins. Pour les ales noires ou blondes complexes.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "apple",
+    "name": "Pomme (jus ou fraîche)",
+    "category": "fruit",
+    "gravity_contribution": 1.010,
+    "description": "Fruit léger. Pour les Lambics ou bières fermières.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "pear",
+    "name": "Poire",
+    "category": "fruit",
+    "gravity_contribution": 1.008,
+    "description": "Fruit doux et floral. Complément idéal pour les blondes.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "grape",
+    "name": "Raisin (blanc ou noir)",
+    "category": "fruit",
+    "gravity_contribution": 1.015,
+    "description": "Fruit sucré. Pour les fusions avec les malts cristal (Lambic artisanal).",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "banana_extract",
+    "name": "Extrait de banane",
+    "category": "fruit",
+    "gravity_contribution": 1.002,
+    "description": "Essences concentrées. À utiliser goutte à goutte. Rappelle les esters de levure belge.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "pineapple",
+    "name": "Ananas",
+    "category": "fruit",
+    "gravity_contribution": 1.010,
+    "description": "Fruit tropical sucré et acidulé. Pour les IPA fruitées ou blondes.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "coconut",
+    "name": "Noix de coco (rapée ou lait)",
+    "category": "épice",
+    "gravity_contribution": 1.005,
+    "description": "Arômes tropicaux et palais crémeux. 50-150g pour 20L.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "wheat_extract",
+    "name": "Extrait de malt de blé",
+    "category": "sucre",
+    "gravity_contribution": 1.035,
+    "description": "Extrait liquide pour simplifier l'empâtage. Moins authentique mais pratique.",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "malt_extract",
+    "name": "Extrait de malt (liquide ou poudre)",
+    "category": "sucre",
+    "gravity_contribution": 1.034,
+    "description": "Malt pré-converti pour brassage simplifié. Divers styles disponibles.",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "sea_salt",
+    "name": "Sel de mer (pour ajuster l'eau)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Minéraux pour enrichir le profil d'eau. 5-20 g pour 20L.",
+    "usage": "Ébullition"
   }
 ]

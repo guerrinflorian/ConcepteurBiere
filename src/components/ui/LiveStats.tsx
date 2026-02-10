@@ -49,7 +49,7 @@ export default function LiveStats() {
   const hasData = og > 1.001;
 
   return (
-    <div className="glass-card-amber rounded-2xl p-5 relative overflow-hidden">
+    <div className="glass-card-amber rounded-2xl p-5 relative overflow-visible">
       {/* Decorative shimmer */}
       <div className="absolute inset-0 shimmer rounded-2xl pointer-events-none opacity-50" />
 
@@ -171,15 +171,15 @@ function AnimatedStatBox({
       <AnimatePresence>
         {showTooltip && (
           <motion.div
-            initial={{ opacity: 0, y: 6, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-3 bg-gray-900 text-white text-xs rounded-xl shadow-2xl pointer-events-none"
+            className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-4 w-80 p-3.5 bg-gray-900 text-white text-xs rounded-xl shadow-2xl pointer-events-none border border-gray-700"
           >
-            <p className="font-bold text-amber-300 mb-1">{tooltip.title}</p>
-            <p className="text-gray-300 mb-2 leading-relaxed">{tooltip.desc}</p>
-            <div className="space-y-1.5 border-t border-gray-700 pt-2">
+            <p className="font-bold text-amber-300 mb-2">{tooltip.title}</p>
+            <p className="text-gray-300 mb-2.5 leading-relaxed">{tooltip.desc}</p>
+            <div className="space-y-2 border-t border-gray-700 pt-2.5">
               <div className="flex items-start gap-1.5">
                 <span className="text-green-400 mt-0.5 flex-shrink-0">▲</span>
                 <p className="text-gray-300"><span className="text-green-400 font-semibold">Augmenter :</span> {tooltip.up}</p>

@@ -35,7 +35,7 @@ export default function Step7Conditioning() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-amber-900 mb-2">
-          Conditionnement
+          <span className="text-3xl mr-2">🍺</span>Conditionnement
         </h2>
         <p className="text-gray-600">
           Choisissez comment carbonater et conditionner votre bière : embouteillage

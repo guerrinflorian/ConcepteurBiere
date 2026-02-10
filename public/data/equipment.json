@@ -236,5 +236,159 @@
     "category": "cuve",
     "description": "Système automatisé avec chauffage, pompe et filtration intégrés.",
     "forPro": false
+  },
+  {
+    "id": "stockpot_large",
+    "name": "Marmite domestique 25-30L",
+    "category": "cuve",
+    "description": "Grande marmite inox de cuisine, utilisable pour petits brassins amateurs (10-15L).",
+    "forPro": false
+  },
+  {
+    "id": "lauter_tun_simple",
+    "name": "Système de filtration simple (BIAB bag, cooler)",
+    "category": "cuve",
+    "description": "Cooler ou seau percé avec filtre pour empâtage simplifié (BIAB, brew-in-a-bag).",
+    "forPro": false
+  },
+  {
+    "id": "wort_chiller_plate_pro",
+    "name": "Échangeur à plaques professionnel",
+    "category": "refroidissement",
+    "description": "Refroidisseur à plaques haute capacité (200L+) pour installation professionnelle.",
+    "forPro": true
+  },
+  {
+    "id": "sparkler",
+    "name": "Pichet/Cruche sans barboteur (Fermentation ouvert traditionnel)",
+    "category": "fermenteur",
+    "description": "Cruche couverte d'un tissu pour fermentation traditionnelle sans barboteur (Lambic, Gueuze).",
+    "forPro": false
+  },
+  {
+    "id": "bottling_wand",
+    "name": "Canne d'embouteillage",
+    "category": "conditionnement",
+    "description": "Tube adaptable au robinet du seau pour remplissage facile des bouteilles.",
+    "forPro": false
+  },
+  {
+    "id": "bottle_washer",
+    "name": "Lave-bouteilles",
+    "category": "accessoire",
+    "description": "Accessoire pour nettoyer les bouteilles à haute pression après utilisation.",
+    "forPro": false
+  },
+  {
+    "id": "siphon_tubing",
+    "name": "Tuyau de siphon",
+    "category": "accessoire",
+    "description": "Tuyau silicone alimentaire pour siphonner et transférer le moût/bière.",
+    "forPro": false
+  },
+  {
+    "id": "hop_basket",
+    "name": "Panier à houblons",
+    "category": "accessoire",
+    "description": "Panier à mailles pour contenir les houblons en vrac pendant l'ébullition.",
+    "forPro": false
+  },
+  {
+    "id": "bagging_system",
+    "name": "Filtre à mousseline (bag brewing)",
+    "category": "accessoire",
+    "description": "Sac en mousseline fine pour empâtage simplifié dans une seule cuve.",
+    "forPro": false
+  },
+  {
+    "id": "oxygen_infuser",
+    "name": "Infuseur d'oxygène / Pierres poreuses",
+    "category": "accessoire",
+    "description": "Pierre poreuse pour oxygéner le moût et favoriser le démarrage de la fermentation.",
+    "forPro": false
+  },
+  {
+    "id": "test_jar",
+    "name": "Verre d'échantillonnage (test tube)",
+    "category": "mesure",
+    "description": "Petit tube pour prélever et observer la bière pendant la fermentation.",
+    "forPro": false
+  },
+  {
+    "id": "temp_strip",
+    "name": "Bande thermique adhésive",
+    "category": "température",
+    "description": "Thermomètre adhésif auto-collant pour lire la température du fermenteur d'un coup d'œil.",
+    "forPro": false
+  },
+  {
+    "id": "keg_20",
+    "name": "Fût Sodastream / Ball Lock (20L)",
+    "category": "conditionnement",
+    "description": "Fût pressurisable pour carbonatation forcée, type ball lock.",
+    "forPro": false
+  },
+  {
+    "id": "pressure_gauge",
+    "name": "Manomètre",
+    "category": "mesure",
+    "description": "Pour mesurer la pression du CO₂ dans les fûts et genevois.",
+    "forPro": false
+  },
+  {
+    "id": "regulator",
+    "name": "Détendeur haute/basse pression",
+    "category": "conditionnement",
+    "description": "Régule la pression du CO₂ pour carbonatation et service au fût.",
+    "forPro": false
+  },
+  {
+    "id": "fittings_quick",
+    "name": "Raccords rapides (ball lock, pin lock)",
+    "category": "accessoire",
+    "description": "Connecteurs pour relier CO₂, fûts et distributeurs.",
+    "forPro": false
+  },
+  {
+    "id": "overflow_bucket",
+    "name": "Seau de débordement",
+    "category": "accessoire",
+    "description": "Seau pour récupérer le débordement du fermenteur lors de fermentations vigoureuses.",
+    "forPro": false
+  },
+  {
+    "id": "brew_kettle_electric",
+    "name": "Cuve de brassage électrique (3000-5000W)",
+    "category": "cuve",
+    "description": "Cuve avec résistance chauffante pour brassage sans cuisinière.",
+    "forPro": false
+  },
+  {
+    "id": "pump_mash",
+    "name": "Pompe pour empâtage",
+    "category": "accessoire",
+    "description": "Pompe de brassage pour circulations et transferts lors de l'infusion.",
+    "forPro": false
+  },
+  {
+    "id": "false_bottom",
+    "name": "Faux-fond / Filtre métallique",
+    "category": "accessoire",
+    "description": "Grille perforée à placer dans la cuve d'empâtage pour la filtration du moût.",
+    "forPro": false
+  },
+  {
+    "id": "mash_tun_pro",
+    "name": "Cuve d'empâtage professionnelle (100-200L)",
+    "category": "cuve",
+    "description": "Grande cuve d'empâtage inox avec robinetterie et faux-fond, pour installation pro.",
+    "forPro": true
+  },
+  {
+    "id": "lauter_tun_pro",
+    "name": "Cuve de filtration professionnelle (Lauter Tun)",
+    "category": "cuve",
+    "description": "Cuve dédiée à la filtration du moût avec faux-fond et agitateur, pour pro.",
+    "forPro": true
   }
 ]

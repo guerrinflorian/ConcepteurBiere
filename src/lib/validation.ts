@@ -25,15 +25,36 @@ export function validateStep(
       break;
     }
     case 1: {
-      if (recipe.params.volume <= 0) errors.push("Le volume doit être supérieur à 0.");
+      if (!recipe.params.volume || recipe.params.volume <= 0)
+        errors.push("Veuillez indiquer un volume de brassin (en litres). Le champ est vide ou à 0.");
       break;
     }
     case 2: {
+      if (recipe.malts.length === 0) {
+        errors.push("Ajoutez au moins un malt.");
+        break;
+      }
+      const maltsWithoutId = recipe.malts.filter((m) => !m.maltId);
+      if (maltsWithoutId.length > 0)
+        errors.push("Chaque malt ajouté doit avoir un malt sélectionné dans la liste.");
+      const maltsWithoutAmount = recipe.malts.filter((m) => m.maltId && (!m.amount || m.amount <= 0));
+      if (maltsWithoutAmount.length > 0)
+        errors.push("Chaque malt sélectionné doit avoir une quantité supérieure à 0.");
       const hasValidMalt = recipe.malts.some((m) => m.maltId && m.amount > 0);
       if (!hasValidMalt) errors.push("Ajoutez au moins un malt avec une quantité supérieure à 0.");
       break;
     }
     case 3: {
+      if (recipe.hops.length === 0) {
+        errors.push("Ajoutez au moins un houblon.");
+        break;
+      }
+      const hopsWithoutId = recipe.hops.filter((h) => !h.hopId);
+      if (hopsWithoutId.length > 0)
+        errors.push("Chaque houblon ajouté doit avoir un houblon sélectionné dans la liste.");
+      const hopsWithoutAmount = recipe.hops.filter((h) => h.hopId && (!h.amount || h.amount <= 0));
+      if (hopsWithoutAmount.length > 0)
+        errors.push("Chaque houblon sélectionné doit avoir une quantité supérieure à 0.");
       const hasValidHop = recipe.hops.some((h) => h.hopId && h.amount > 0);
       if (!hasValidHop) errors.push("Ajoutez au moins un houblon avec une quantité supérieure à 0.");
       break;
@@ -45,15 +66,20 @@ export function validateStep(
     case 5: {
       if (recipe.mashing.mashTemp < 60 || recipe.mashing.mashTemp > 72)
         errors.push("La température d'empâtage doit être entre 60 et 72°C.");
-      if (recipe.mashing.boilDuration <= 0)
-        errors.push("La durée d'ébullition doit être supérieure à 0.");
+      if (!recipe.mashing.boilDuration || recipe.mashing.boilDuration <= 0)
+        errors.push("Veuillez indiquer une durée d'ébullition (en minutes). Le champ est vide ou à 0.");
       break;
     }
     case 6: {
-      if (recipe.fermentation.fermentationTemp < 4 || recipe.fermentation.fermentationTemp > 35)
-        errors.push("La température de fermentation doit être entre 4 et 35°C.");
-      if (recipe.fermentation.primaryDays <= 0)
-        errors.push("La durée de fermentation doit être supérieure à 0 jours.");
+      const temp = recipe.fermentation.fermentationTemp;
+      if (temp === undefined || temp === null || isNaN(temp) || temp < 4 || temp > 35)
+        errors.push("La température de fermentation doit être comprise entre 4 et 35°C. Vérifiez la valeur saisie.");
+      if (!recipe.fermentation.primaryDays || recipe.fermentation.primaryDays <= 0)
+        errors.push("Veuillez indiquer la durée de fermentation primaire (en jours). Le champ est vide ou à 0.");
+      if (recipe.fermentation.hasSecondary) {
+        if (!recipe.fermentation.secondaryDays || recipe.fermentation.secondaryDays <= 0)
+          errors.push("Veuillez indiquer la durée de fermentation secondaire (en jours).");
+      }
       break;
     }
     case 7: {
