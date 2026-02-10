@@ -11,6 +11,9 @@ import {
   BeerStyle,
   Adjunct,
   CalculatedValues,
+  UiMode,
+  AssistantState,
+  emptyAssistant,
 } from "@/lib/types";
 import { calculateAll } from "@/lib/calculations";
 import { StepValidation, validateAllSteps, isStepAccessible as checkStepAccessible } from "@/lib/validation";
@@ -46,6 +49,20 @@ interface RecipeContextType {
   exportRecipe: () => void;
   importRecipe: (json: string) => boolean;
   resetRecipe: () => void;
+
+  // Mode UI (Débutant / Expert)
+  uiMode: UiMode;
+  setUiMode: (mode: UiMode) => void;
+
+  // Assistant anti-erreurs
+  assistant: AssistantState;
+  toggleHygieneCheck: (checkId: string) => void;
+  dismissRisk: (riskId: string) => void;
+  resetAssistant: () => void;
+
+  // Glossaire
+  showGlossary: boolean;
+  setShowGlossary: (show: boolean) => void;
 }
 
 const RecipeContext = createContext<RecipeContextType | null>(null);
@@ -61,6 +78,9 @@ const TOTAL_STEPS = 9;
 export function RecipeProvider({ children }: { children: React.ReactNode }) {
   const [recipe, setRecipe] = useState<Recipe>(emptyRecipe);
   const [currentStep, setCurrentStep] = useState(0);
+  const [uiMode, setUiMode] = useState<UiMode>("beginner");
+  const [assistant, setAssistant] = useState<AssistantState>(emptyAssistant);
+  const [showGlossary, setShowGlossary] = useState(false);
 
   // Données de référence
   const [equipmentData, setEquipmentData] = useState<Equipment[]>([]);
@@ -152,6 +172,7 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
         mashing: { ...emptyRecipe.mashing, ...parsed.mashing },
         fermentation: { ...emptyRecipe.fermentation, ...parsed.fermentation },
         conditioning: { ...emptyRecipe.conditioning, ...parsed.conditioning },
+        adjuncts: parsed.adjuncts ?? [],
       };
       setRecipe(merged);
       setCurrentStep(8); // Aller au résumé
@@ -164,6 +185,28 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
   const resetRecipe = useCallback(() => {
     setRecipe(emptyRecipe);
     setCurrentStep(0);
+    setAssistant(emptyAssistant);
+  }, []);
+
+  const toggleHygieneCheck = useCallback((checkId: string) => {
+    setAssistant((prev) => ({
+      ...prev,
+      hygieneChecks: {
+        ...prev.hygieneChecks,
+        [checkId]: !prev.hygieneChecks[checkId],
+      },
+    }));
+  }, []);
+
+  const dismissRisk = useCallback((riskId: string) => {
+    setAssistant((prev) => ({
+      ...prev,
+      dismissedRiskIds: [...prev.dismissedRiskIds, riskId],
+    }));
+  }, []);
+
+  const resetAssistant = useCallback(() => {
+    setAssistant(emptyAssistant);
   }, []);
 
   return (
@@ -189,6 +232,14 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
         exportRecipe,
         importRecipe,
         resetRecipe,
+        uiMode,
+        setUiMode,
+        assistant,
+        toggleHygieneCheck,
+        dismissRisk,
+        resetAssistant,
+        showGlossary,
+        setShowGlossary,
       }}
     >
       {children}

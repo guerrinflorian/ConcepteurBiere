@@ -5,6 +5,11 @@ import { useRecipe } from "@/context/RecipeContext";
 import StepIndicator from "@/components/ui/StepIndicator";
 import LiveStats from "@/components/ui/LiveStats";
 import ValidationErrors from "@/components/ui/ValidationErrors";
+import EstimationsPanel from "@/components/estimations/EstimationsPanel";
+import RiskBadge from "@/components/assistant/RiskBadge";
+import RiskPanel from "@/components/assistant/RiskPanel";
+import GlossaryModal from "@/components/help/GlossaryModal";
+import HygieneChecklist from "@/components/assistant/HygieneChecklist";
 import Step0Profile from "@/components/steps/Step0Profile";
 import Step1Params from "@/components/steps/Step1Params";
 import Step2Malts from "@/components/steps/Step2Malts";
@@ -15,6 +20,15 @@ import Step6Fermentation from "@/components/steps/Step6Fermentation";
 import Step7Conditioning from "@/components/steps/Step7Conditioning";
 import Step8Summary from "@/components/steps/Step8Summary";
 import { useState, useRef } from "react";
+
+/** Mapping étape → stepId pour la checklist d'hygiène */
+const stepIdMap: Record<number, string> = {
+  0: "step0",
+  2: "step2",
+  5: "step5",
+  6: "step6",
+  7: "step7",
+};
 
 const steps = [
   Step0Profile,
@@ -46,12 +60,25 @@ const stepVariants = {
 
 /**
  * Composant principal du wizard multi-étapes.
+ * Intègre le toggle Débutant/Expert, le badge de risques, le lexique,
+ * la checklist d'hygiène et le panneau d'estimations.
  */
 export default function Wizard() {
-  const { currentStep, setCurrentStep, totalSteps, dataLoaded, stepValidations } = useRecipe();
+  const {
+    currentStep,
+    setCurrentStep,
+    totalSteps,
+    dataLoaded,
+    stepValidations,
+    uiMode,
+    setUiMode,
+    showGlossary,
+    setShowGlossary,
+  } = useRecipe();
   const [direction, setDirection] = useState(0);
   const prevStep = useRef(currentStep);
   const [showErrors, setShowErrors] = useState(false);
+  const [showRiskPanel, setShowRiskPanel] = useState(false);
 
   if (!dataLoaded) {
     return (
@@ -71,6 +98,7 @@ export default function Wizard() {
   const StepComponent = steps[currentStep];
   const currentValidation = stepValidations[currentStep];
   const isCurrentStepValid = currentValidation?.valid ?? true;
+  const hygieneStepId = stepIdMap[currentStep];
 
   function goTo(step: number) {
     if (step < 0 || step >= totalSteps) return;
@@ -98,7 +126,7 @@ export default function Wizard() {
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-6 no-print"
+        className="text-center mb-4 no-print"
       >
         <h1 className="text-3xl sm:text-4xl font-bold text-amber-900">
           ConcepteurBiere
@@ -107,6 +135,48 @@ export default function Wizard() {
           Assistant de brassage de biere maison
         </p>
       </motion.header>
+
+      {/* Barre d'outils : mode + risques + lexique */}
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-4 no-print">
+        {/* Toggle Débutant / Expert */}
+        <div className="flex items-center bg-white rounded-full border border-gray-200 overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setUiMode("beginner")}
+            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+              uiMode === "beginner"
+                ? "bg-amber-500 text-white"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
+          >
+            Débutant
+          </button>
+          <button
+            type="button"
+            onClick={() => setUiMode("expert")}
+            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+              uiMode === "expert"
+                ? "bg-amber-500 text-white"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
+          >
+            Expert
+          </button>
+        </div>
+
+        {/* Badge de risques */}
+        <RiskBadge onClick={() => setShowRiskPanel(true)} />
+
+        {/* Bouton Lexique */}
+        <button
+          type="button"
+          onClick={() => setShowGlossary(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-700 text-xs font-medium hover:bg-amber-200 transition-colors"
+        >
+          <span>📖</span>
+          <span>Lexique</span>
+        </button>
+      </div>
 
       {/* Indicateur d'étapes */}
       <StepIndicator />
@@ -127,6 +197,10 @@ export default function Wizard() {
               className="bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200 p-6 shadow-sm"
             >
               <StepComponent />
+
+              {/* Checklist d'hygiène pour cette étape */}
+              {hygieneStepId && <HygieneChecklist stepId={hygieneStepId} />}
+
               {showErrors && !isCurrentStepValid && (
                 <ValidationErrors errors={currentValidation.errors} />
               )}
@@ -165,18 +239,31 @@ export default function Wizard() {
           </div>
         </div>
 
-        {/* Panel latéral : stats en direct */}
+        {/* Panel latéral : stats en direct + estimations */}
         <motion.aside
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="lg:w-64 flex-shrink-0 no-print"
+          className="lg:w-72 flex-shrink-0 no-print"
         >
-          <div className="lg:sticky lg:top-6">
+          <div className="lg:sticky lg:top-6 space-y-4">
             <LiveStats />
+            <EstimationsPanel />
           </div>
         </motion.aside>
       </div>
+
+      {/* Modales */}
+      <AnimatePresence>
+        {showRiskPanel && (
+          <RiskPanel onClose={() => setShowRiskPanel(false)} />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showGlossary && (
+          <GlossaryModal onClose={() => setShowGlossary(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

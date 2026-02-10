@@ -16,14 +16,14 @@ export default function Tooltip({ text }: { text: string }) {
       onFocus={() => setShow(true)}
       onBlur={() => setShow(false)}
     >
-      <button
-        type="button"
+      <span
+        role="button"
         tabIndex={0}
-        className="w-4 h-4 rounded-full bg-amber-200 text-amber-800 text-[10px] font-bold inline-flex items-center justify-center hover:bg-amber-300 transition-colors cursor-help"
+        className="w-4 h-4 rounded-full bg-amber-200 text-amber-800 text-[10px] font-bold inline-flex items-center justify-center hover:bg-amber-300 transition-colors cursor-help select-none"
         aria-label="Info"
       >
         i
-      </button>
+      </span>
       <AnimatePresence>
         {show && (
           <motion.div

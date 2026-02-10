@@ -128,6 +128,21 @@ export interface Recipe {
   conditioning: RecipeConditioning;
 }
 
+// === Types pour le mode UI et l'assistant ===
+
+export type UiMode = "beginner" | "expert";
+
+/** État de l'assistant anti-erreurs (hygiène + risques masqués) */
+export interface AssistantState {
+  hygieneChecks: Record<string, boolean>;
+  dismissedRiskIds: string[];
+}
+
+export const emptyAssistant: AssistantState = {
+  hygieneChecks: {},
+  dismissedRiskIds: [],
+};
+
 // === Types pour les résultats calculés ===
 
 export interface CalculatedValues {
