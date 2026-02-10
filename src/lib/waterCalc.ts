@@ -81,6 +81,10 @@ function calculateExtractWater(
     preBoilVolumeL: round(preBoilVolumeL),
     postBoilVolumeL: round(batchVolumeL),
     lossesL: round(lossesL + boilOffL),
+    grainAbsorptionL: 0,
+    boilOffL: round(boilOffL),
+    trubLossL: TRUB_LOSS_L,
+    fixedLossesL: FIXED_LOSSES_L,
   };
 }
 
@@ -124,6 +128,10 @@ function calculateAllGrainWater(
     preBoilVolumeL: round(preBoilVolumeL),
     postBoilVolumeL: round(batchVolumeL),
     lossesL: round(lossesL),
+    grainAbsorptionL: round(grainAbsorptionL),
+    boilOffL: round(boilOffL),
+    trubLossL: TRUB_LOSS_L,
+    fixedLossesL: FIXED_LOSSES_L,
   };
 }
 

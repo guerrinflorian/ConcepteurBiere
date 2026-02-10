@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useRecipe } from "@/context/RecipeContext";
 import { ebcToColor, ebcToColorLabel, ibuToLabel } from "@/lib/calculations";
-import { calculateWaterPlan } from "@/lib/waterCalc";
+import { calculateWaterPlan, totalGrainKg } from "@/lib/waterCalc";
 import { buildCheckContext, runConsistencyChecks } from "@/lib/consistencyChecks";
 import { buildProcedureContext, generateProcedure } from "@/lib/recipeProcedure";
 import BeerGlass from "@/components/ui/BeerGlass";
@@ -140,20 +140,133 @@ export default function Step8Summary() {
       )}
 
       {/* Plan d'eau */}
-      <Section title="Plan d'eau">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
-          {isAllGrain && (
-            <>
-              <ResultItem label="Eau d'empâtage" value={`${waterPlan.mashWaterL} L`} />
-              <ResultItem label="Eau de rinçage" value={`${waterPlan.spargeWaterL} L`} />
-            </>
-          )}
-          <ResultItem label="Volume pré-ébullition" value={`${waterPlan.preBoilVolumeL} L`} />
-          <ResultItem label="Volume final" value={`${waterPlan.postBoilVolumeL} L`} />
-          <ResultItem label="Eau totale" value={`${waterPlan.totalWaterL} L`} />
-          <ResultItem label="Pertes estimées" value={`${waterPlan.lossesL} L`} />
+      <Section title="Plan d'eau — Gestion complète des volumes">
+        {/* Résumé principal */}
+        <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-200 mb-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-2xl font-bold text-blue-800">{waterPlan.totalWaterL} L</span>
+            <span className="text-sm text-blue-600">d&apos;eau totale nécessaire</span>
+          </div>
+          <p className="text-sm text-blue-700">
+            Pour obtenir <strong>{waterPlan.postBoilVolumeL} L</strong> de bière en fermenteur,
+            vous devez partir de <strong>{waterPlan.totalWaterL} L</strong> d&apos;eau
+            car <strong>{waterPlan.lossesL} L</strong> seront perdus durant le processus.
+          </p>
         </div>
-        <p className="text-xs text-gray-400 mt-2">
+
+        {isAllGrain ? (
+          <>
+            {/* Tout-grain : 2 eaux séparées */}
+            <h4 className="text-sm font-bold text-gray-700 mb-2">Répartition de l&apos;eau (tout-grain)</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+              <div className="p-3 bg-amber-50 rounded-lg border border-amber-200">
+                <span className="text-xs text-amber-600 font-semibold uppercase tracking-wide">Cuve d&apos;empâtage</span>
+                <p className="text-xl font-bold text-amber-800 mt-1">{waterPlan.mashWaterL} L</p>
+                <p className="text-xs text-amber-700 mt-1">
+                  Eau chauffée à {recipe.mashing.mashTemp + 2}°C, versée sur les {totalGrainKg(recipe.malts).toFixed(1)} kg de grains.
+                  Ratio : 2,7 L/kg de grain.
+                </p>
+              </div>
+              <div className="p-3 bg-teal-50 rounded-lg border border-teal-200">
+                <span className="text-xs text-teal-600 font-semibold uppercase tracking-wide">Eau de rinçage (sparge)</span>
+                <p className="text-xl font-bold text-teal-800 mt-1">{waterPlan.spargeWaterL} L</p>
+                <p className="text-xs text-teal-700 mt-1">
+                  Eau chauffée à 75-78°C, versée sur les grains après filtration pour extraire les derniers sucres.
+                </p>
+              </div>
+            </div>
+
+            {/* Parcours de l'eau */}
+            <h4 className="text-sm font-bold text-gray-700 mb-2">Parcours de l&apos;eau étape par étape</h4>
+            <div className="space-y-1 text-sm">
+              <WaterFlowRow
+                icon="1"
+                label="Empâtage"
+                detail={`Versez ${waterPlan.mashWaterL} L d'eau chaude dans la cuve + ${totalGrainKg(recipe.malts).toFixed(1)} kg de grains`}
+              />
+              <WaterFlowArrow loss={`-${waterPlan.grainAbsorptionL} L absorbés par les grains`} />
+              <WaterFlowRow
+                icon="2"
+                label="Filtration + Rinçage"
+                detail={`Rincez avec ${waterPlan.spargeWaterL} L → récupérez ~${waterPlan.preBoilVolumeL} L de moût dans la cuve d'ébullition`}
+              />
+              <WaterFlowArrow loss={`-${waterPlan.boilOffL} L évaporés (ébullition ${recipe.mashing.boilDuration} min)`} />
+              <WaterFlowRow
+                icon="3"
+                label="Après ébullition"
+                detail={`~${waterPlan.postBoilVolumeL + waterPlan.trubLossL + waterPlan.fixedLossesL} L dans la cuve`}
+              />
+              <WaterFlowArrow loss={`-${waterPlan.trubLossL} L de trub (résidus houblon/protéines) — -${waterPlan.fixedLossesL} L pertes transfert`} />
+              <WaterFlowRow
+                icon="✓"
+                label="En fermenteur"
+                detail={`~${waterPlan.postBoilVolumeL} L de moût prêt à fermenter`}
+                highlight
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Extrait/Kit */}
+            <h4 className="text-sm font-bold text-gray-700 mb-2">Répartition de l&apos;eau (extrait/kit)</h4>
+            <div className="p-3 bg-amber-50 rounded-lg border border-amber-200 mb-4">
+              <span className="text-xs text-amber-600 font-semibold uppercase tracking-wide">Cuve d&apos;ébullition</span>
+              <p className="text-xl font-bold text-amber-800 mt-1">{waterPlan.totalWaterL} L</p>
+              <p className="text-xs text-amber-700 mt-1">
+                Toute l&apos;eau est mise dans la cuve, chauffée à ~70°C pour dissoudre l&apos;extrait de malt, puis portée à ébullition.
+              </p>
+            </div>
+
+            <h4 className="text-sm font-bold text-gray-700 mb-2">Parcours de l&apos;eau étape par étape</h4>
+            <div className="space-y-1 text-sm">
+              <WaterFlowRow
+                icon="1"
+                label="Cuve d'ébullition"
+                detail={`${waterPlan.preBoilVolumeL} L d'eau + extrait de malt dissous`}
+              />
+              <WaterFlowArrow loss={`-${waterPlan.boilOffL} L évaporés (ébullition ${recipe.mashing.boilDuration} min)`} />
+              <WaterFlowRow
+                icon="2"
+                label="Après ébullition"
+                detail={`~${waterPlan.postBoilVolumeL + waterPlan.trubLossL + waterPlan.fixedLossesL} L dans la cuve`}
+              />
+              <WaterFlowArrow loss={`-${waterPlan.trubLossL} L de trub — -${waterPlan.fixedLossesL} L pertes transfert`} />
+              <WaterFlowRow
+                icon="✓"
+                label="En fermenteur"
+                detail={`~${waterPlan.postBoilVolumeL} L de moût prêt à fermenter`}
+                highlight
+              />
+            </div>
+          </>
+        )}
+
+        {/* Détail des pertes */}
+        <div className="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+          <h4 className="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-2">Détail des pertes ({waterPlan.lossesL} L)</h4>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            {isAllGrain && (
+              <div>
+                <span className="text-gray-500">Absorption grains</span>
+                <p className="font-medium text-gray-700">{waterPlan.grainAbsorptionL} L</p>
+              </div>
+            )}
+            <div>
+              <span className="text-gray-500">Évaporation ébullition</span>
+              <p className="font-medium text-gray-700">{waterPlan.boilOffL} L</p>
+            </div>
+            <div>
+              <span className="text-gray-500">Trub (résidus)</span>
+              <p className="font-medium text-gray-700">{waterPlan.trubLossL} L</p>
+            </div>
+            <div>
+              <span className="text-gray-500">Pertes transfert/cuve</span>
+              <p className="font-medium text-gray-700">{waterPlan.fixedLossesL} L</p>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-400 mt-3">
           Source d&apos;eau : {recipe.water.sourceType === "robinet" ? "Robinet" : recipe.water.sourceType === "bouteille" ? "Bouteille" : recipe.water.sourceType === "osmosee" ? "Osmosée" : "Non précisé"}
           {recipe.water.notes && ` — ${recipe.water.notes}`}
         </p>
@@ -405,6 +518,43 @@ function ResultItem({
         )}
         {value}
       </span>
+    </div>
+  );
+}
+
+function WaterFlowRow({
+  icon,
+  label,
+  detail,
+  highlight,
+}: {
+  icon: string;
+  label: string;
+  detail: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div className={`flex items-start gap-3 p-2 rounded-lg ${highlight ? "bg-green-50 border border-green-200" : ""}`}>
+      <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+        highlight
+          ? "bg-green-500 text-white"
+          : "bg-blue-100 text-blue-700"
+      }`}>
+        {icon}
+      </div>
+      <div>
+        <span className={`font-semibold text-sm ${highlight ? "text-green-800" : "text-gray-800"}`}>{label}</span>
+        <p className={`text-xs ${highlight ? "text-green-700" : "text-gray-600"}`}>{detail}</p>
+      </div>
+    </div>
+  );
+}
+
+function WaterFlowArrow({ loss }: { loss: string }) {
+  return (
+    <div className="flex items-center gap-2 pl-5 text-xs text-red-500">
+      <span>↓</span>
+      <span className="italic">{loss}</span>
     </div>
   );
 }

@@ -288,4 +288,15 @@ input[type="checkbox"].hygiene-check:checked::after {
   .p-4 {
     page-break-inside: avoid;
   }
+
+  /* Procedure steps: ensure each step stays together */
+  .space-y-4 > div {
+    page-break-inside: avoid;
+  }
+
+  /* Colored backgrounds for print */
+  .bg-blue-50, .bg-amber-50, .bg-teal-50, .bg-green-50, .bg-red-50, .bg-gray-50 {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }

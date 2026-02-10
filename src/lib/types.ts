@@ -105,6 +105,11 @@ export interface WaterPlan {
   preBoilVolumeL: number;
   postBoilVolumeL: number;
   lossesL: number;
+  /** Détail des pertes */
+  grainAbsorptionL: number;
+  boilOffL: number;
+  trubLossL: number;
+  fixedLossesL: number;
 }
 
 // === Types pour la procédure de fabrication ===
