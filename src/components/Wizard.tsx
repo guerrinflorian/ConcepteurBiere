@@ -15,6 +15,7 @@ import Step1Params from "@/components/steps/Step1Params";
 import Step2Malts from "@/components/steps/Step2Malts";
 import Step3Hops from "@/components/steps/Step3Hops";
 import Step4Yeast from "@/components/steps/Step4Yeast";
+import WaterStep from "@/components/steps/WaterStep";
 import Step5Mashing from "@/components/steps/Step5Mashing";
 import Step6Fermentation from "@/components/steps/Step6Fermentation";
 import Step7Conditioning from "@/components/steps/Step7Conditioning";
@@ -22,25 +23,30 @@ import Step8Summary from "@/components/steps/Step8Summary";
 import { hygieneChecklist } from "@/data/hygieneChecklist";
 import { useState, useRef, useMemo } from "react";
 
-/** Mapping étape → stepId pour la checklist d'hygiène */
+/**
+ * Mapping étape → stepId pour la checklist d'hygiène.
+ * Les stepIds dans hygieneChecklist.ts restent inchangés (step0, step2, step5, step6, step7).
+ * Seuls les indices changent à cause de l'insertion de WaterStep à l'index 5.
+ */
 const stepIdMap: Record<number, string> = {
   0: "step0",
   2: "step2",
-  5: "step5",
-  6: "step6",
-  7: "step7",
+  6: "step5", // Mashing est maintenant index 6, mais son hygiene data est "step5"
+  7: "step6", // Fermentation est maintenant index 7, hygiene data "step6"
+  8: "step7", // Conditioning est maintenant index 8, hygiene data "step7"
 };
 
 const steps = [
-  Step0Profile,
-  Step1Params,
-  Step2Malts,
-  Step3Hops,
-  Step4Yeast,
-  Step5Mashing,
-  Step6Fermentation,
-  Step7Conditioning,
-  Step8Summary,
+  Step0Profile,     // 0
+  Step1Params,      // 1
+  Step2Malts,       // 2
+  Step3Hops,        // 3
+  Step4Yeast,       // 4
+  WaterStep,        // 5 ← NOUVEAU
+  Step5Mashing,     // 6 (anciennement 5)
+  Step6Fermentation,// 7 (anciennement 6)
+  Step7Conditioning,// 8 (anciennement 7)
+  Step8Summary,     // 9 (anciennement 8)
 ];
 
 const STEP_NAMES = [
@@ -49,6 +55,7 @@ const STEP_NAMES = [
   "Malts & Céréales",
   "Houblons",
   "Levure",
+  "Eau & Volumes",
   "Empâtage & Ébullition",
   "Fermentation",
   "Conditionnement",
@@ -91,6 +98,7 @@ export default function Wizard() {
     assistant,
     recipe,
     equipmentData,
+    resetRecipe,
   } = useRecipe();
   const [direction, setDirection] = useState(0);
   const prevStep = useRef(currentStep);
@@ -213,7 +221,7 @@ export default function Wizard() {
         </p>
       </motion.header>
 
-      {/* Barre d'outils : mode + risques + lexique */}
+      {/* Barre d'outils : mode + risques + lexique + accueil */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -231,7 +239,7 @@ export default function Wizard() {
                 : "text-gray-500 hover:bg-gray-50"
             }`}
           >
-            🎓 Débutant
+            Débutant
           </button>
           <button
             type="button"
@@ -242,7 +250,7 @@ export default function Wizard() {
                 : "text-gray-500 hover:bg-gray-50"
             }`}
           >
-            ⚡ Expert
+            Expert
           </button>
         </div>
 
@@ -255,8 +263,20 @@ export default function Wizard() {
           onClick={() => setShowGlossary(true)}
           className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-semibold hover:bg-amber-50 hover:border-amber-200 hover:text-amber-700 transition-all shadow-sm"
         >
-          <span>📖</span>
           <span>Lexique</span>
+        </button>
+
+        {/* Bouton Accueil */}
+        <button
+          type="button"
+          onClick={() => {
+            if (confirm("Revenir à l'accueil ? Les données non exportées seront perdues.")) {
+              resetRecipe();
+            }
+          }}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-semibold hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all shadow-sm"
+        >
+          <span>Accueil</span>
         </button>
       </motion.div>
 
@@ -315,7 +335,7 @@ export default function Wizard() {
                     <span className="text-teal-600 text-lg mt-0.5">🧹</span>
                     <div>
                       <p className="text-sm font-semibold text-teal-800">
-                        Points d'hygiène incomplets
+                        Points d&apos;hygiène incomplets
                       </p>
                       <p className="text-xs text-teal-700 mt-0.5">
                         {hygieneError}

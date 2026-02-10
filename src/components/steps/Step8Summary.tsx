@@ -3,11 +3,15 @@
 import { useRef } from "react";
 import { useRecipe } from "@/context/RecipeContext";
 import { ebcToColor, ebcToColorLabel, ibuToLabel } from "@/lib/calculations";
+import { calculateWaterPlan } from "@/lib/waterCalc";
+import { buildCheckContext, runConsistencyChecks } from "@/lib/consistencyChecks";
+import { buildProcedureContext, generateProcedure } from "@/lib/recipeProcedure";
 import BeerGlass from "@/components/ui/BeerGlass";
 import StyleComparison from "@/components/ui/StyleComparison";
+import ProcedureSection from "@/components/ProcedureSection";
 
 /**
- * Étape 8 : Résumé de la recette avec export/import.
+ * Étape 9 (anciennement 8) : Résumé complet de la recette + procédure A→Z.
  */
 export default function Step8Summary() {
   const {
@@ -29,6 +33,18 @@ export default function Step8Summary() {
   const yeast = yeastsData.find((y) => y.id === recipe.yeastId);
   const style = stylesData.find((s) => s.id === recipe.params.styleId);
   const adjuncts = recipe.adjuncts ?? [];
+  const waterPlan = calculateWaterPlan(recipe);
+  const isAllGrain = recipe.params.method === "tout_grain";
+
+  // Checks de cohérence
+  const checkCtx = buildCheckContext(recipe, equipmentData);
+  const checks = runConsistencyChecks(checkCtx);
+
+  // Procédure de fabrication
+  const procedureCtx = buildProcedureContext(
+    recipe, maltsData, hopsData, yeastsData, adjunctsData, equipmentData
+  );
+  const procedure = generateProcedure(procedureCtx);
 
   function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -44,13 +60,18 @@ export default function Step8Summary() {
       }
     };
     reader.readAsText(file);
-    // Reset pour permettre de réimporter le même fichier
     e.target.value = "";
   }
 
   const selectedEquipment = recipe.profile.selectedEquipment
     .map((id) => equipmentData.find((e) => e.id === id))
     .filter(Boolean);
+
+  const methodLabel = recipe.params.method === "tout_grain"
+    ? "Tout-grain"
+    : recipe.params.method === "extrait"
+    ? "Extrait"
+    : "Kit";
 
   return (
     <div className="space-y-6">
@@ -59,8 +80,7 @@ export default function Step8Summary() {
           Résumé de la recette
         </h2>
         <p className="text-gray-600">
-          Voici la fiche récapitulative de votre recette. Vérifiez tous les
-          paramètres avant d&apos;exporter.
+          Voici la fiche récapitulative complète de votre recette avec le guide de fabrication personnalisé.
         </p>
       </div>
 
@@ -75,8 +95,8 @@ export default function Step8Summary() {
             <p className="text-sm text-amber-700">{style.name}</p>
           )}
           <p className="text-sm text-gray-600 mt-1">
-            Brassage {recipe.profile.userType === "pro" ? "professionnel" : "amateur"}{" "}
-            — {recipe.params.volume} L
+            {methodLabel} — {recipe.params.volume} L —{" "}
+            {recipe.profile.userType === "pro" ? "professionnel" : "amateur"}
           </p>
           <div className="flex flex-wrap gap-3 mt-3">
             <StatBadge label="OG" value={calculated.og.toFixed(3)} />
@@ -88,10 +108,56 @@ export default function Step8Summary() {
         </div>
       </div>
 
+      {/* Vérifications de cohérence */}
+      {checks.length > 0 && (
+        <Section title="Vérifications de cohérence">
+          <div className="space-y-2">
+            {checks.map((check) => (
+              <div
+                key={check.id}
+                className={`p-3 rounded-lg border text-sm ${
+                  check.level === "danger"
+                    ? "bg-red-50 border-red-300 text-red-800"
+                    : check.level === "warn"
+                    ? "bg-yellow-50 border-yellow-300 text-yellow-800"
+                    : "bg-blue-50 border-blue-300 text-blue-800"
+                }`}
+              >
+                <span className="font-semibold">
+                  {check.level === "danger" ? "⛔" : check.level === "warn" ? "⚠️" : "ℹ️"}{" "}
+                  {check.title}
+                </span>
+                <p className="mt-0.5">{check.message}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
       {/* Comparaison avec le style */}
       {style && (
         <StyleComparison style={style} calculated={calculated} />
       )}
+
+      {/* Plan d'eau */}
+      <Section title="Plan d'eau">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+          {isAllGrain && (
+            <>
+              <ResultItem label="Eau d'empâtage" value={`${waterPlan.mashWaterL} L`} />
+              <ResultItem label="Eau de rinçage" value={`${waterPlan.spargeWaterL} L`} />
+            </>
+          )}
+          <ResultItem label="Volume pré-ébullition" value={`${waterPlan.preBoilVolumeL} L`} />
+          <ResultItem label="Volume final" value={`${waterPlan.postBoilVolumeL} L`} />
+          <ResultItem label="Eau totale" value={`${waterPlan.totalWaterL} L`} />
+          <ResultItem label="Pertes estimées" value={`${waterPlan.lossesL} L`} />
+        </div>
+        <p className="text-xs text-gray-400 mt-2">
+          Source d&apos;eau : {recipe.water.sourceType === "robinet" ? "Robinet" : recipe.water.sourceType === "bouteille" ? "Bouteille" : recipe.water.sourceType === "osmosee" ? "Osmosée" : "Non précisé"}
+          {recipe.water.notes && ` — ${recipe.water.notes}`}
+        </p>
+      </Section>
 
       {/* Ingrédients */}
       <Section title="Ingrédients">
@@ -165,6 +231,9 @@ export default function Step8Summary() {
       <Section title="Processus">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div>
+            <strong>Méthode :</strong> {methodLabel}
+          </div>
+          <div>
             <strong>Empâtage :</strong> {recipe.mashing.mashTemp}°C
           </div>
           <div>
@@ -224,41 +293,10 @@ export default function Step8Summary() {
         </Section>
       )}
 
-      {/* Conseils finaux */}
-      <Section title="Conseils de brassage">
-        <ul className="list-disc list-inside text-sm text-gray-700 space-y-2">
-          <li>
-            Nettoyez et désinfectez tout le matériel en contact avec le moût après
-            ébullition. La propreté est la clé d&apos;une bière réussie.
-          </li>
-          <li>
-            Pendant l&apos;ébullition, surveillez les débordements (mousse au démarrage).
-            Réduisez le feu dès les premiers signes.
-          </li>
-          <li>
-            Refroidissez le moût le plus rapidement possible après l&apos;ébullition
-            pour limiter les infections et les composés indésirables.
-          </li>
-          <li>
-            Oxygénez bien le moût avant d&apos;ensemencer la levure (agitez vigoureusement
-            le fermenteur fermé).
-          </li>
-          <li>
-            Après {recipe.fermentation.primaryDays} jours de fermentation, vérifiez
-            la densité{" "}
-            {recipe.profile.selectedEquipment.includes("hydrometer")
-              ? "avec votre densimètre"
-              : "(idéalement avec un densimètre)"}{" "}
-            deux jours de suite pour confirmer la fin de la fermentation.
-          </li>
-          {recipe.conditioning.mode === "bottles" && (
-            <li>
-              Après embouteillage, attendez 2–3 semaines à température ambiante
-              (~20°C) pour la prise de mousse, puis stockez au frais.
-            </li>
-          )}
-        </ul>
-      </Section>
+      {/* Procédure de fabrication A→Z */}
+      <div className="p-4 bg-white border border-gray-200 rounded-lg">
+        <ProcedureSection steps={procedure} />
+      </div>
 
       {/* Boutons d'action */}
       <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200 no-print">

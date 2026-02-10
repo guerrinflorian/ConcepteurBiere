@@ -9,6 +9,7 @@ const STEP_LABELS = [
   "Malts",
   "Houblons",
   "Levure",
+  "Eau",
   "Empâtage",
   "Fermentation",
   "Conditionnement",
@@ -16,7 +17,7 @@ const STEP_LABELS = [
 ];
 
 const STEP_ICONS = [
-  "👤", "⚙️", "🌾", "🌿", "🧫", "🔥", "🫧", "🍺", "📋",
+  "👤", "⚙️", "🌾", "🌿", "🧫", "💧", "🔥", "🫧", "🍺", "📋",
 ];
 
 export default function StepIndicator() {

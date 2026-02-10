@@ -61,7 +61,7 @@ export default function Tooltip({ text }: { text: string }) {
                 : "top-full mt-3"
             }`}
           >
-            <p className="leading-relaxed text-gray-100">{text}</p>
+            <span className="leading-relaxed text-gray-100 block">{text}</span>
             {/* Arrow - adapté selon la position */}
             {position === "top" ? (
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-gray-900" />

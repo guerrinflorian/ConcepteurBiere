@@ -5,6 +5,21 @@ export interface StepValidation {
   errors: string[];
 }
 
+/**
+ * Valide une étape du wizard.
+ *
+ * Ordre des étapes (10 au total) :
+ * 0: Profil & Équipement
+ * 1: Paramètres (nom, volume, style, méthode)
+ * 2: Malts & Céréales
+ * 3: Houblons
+ * 4: Levure
+ * 5: Eau & Volumes ← NOUVEAU
+ * 6: Empâtage & Ébullition (anciennement 5)
+ * 7: Fermentation (anciennement 6)
+ * 8: Conditionnement (anciennement 7)
+ * 9: Résumé (anciennement 8)
+ */
 export function validateStep(
   step: number,
   recipe: Recipe,
@@ -64,13 +79,18 @@ export function validateStep(
       break;
     }
     case 5: {
+      // Eau & Volumes — toujours valide (les calculs sont automatiques)
+      // On vérifie juste que le source type est défini
+      break;
+    }
+    case 6: {
       if (recipe.mashing.mashTemp < 60 || recipe.mashing.mashTemp > 72)
         errors.push("La température d'empâtage doit être entre 60 et 72°C.");
       if (!recipe.mashing.boilDuration || recipe.mashing.boilDuration <= 0)
         errors.push("Veuillez indiquer une durée d'ébullition (en minutes). Le champ est vide ou à 0.");
       break;
     }
-    case 6: {
+    case 7: {
       const temp = recipe.fermentation.fermentationTemp;
       if (temp === undefined || temp === null || isNaN(temp) || temp < 4 || temp > 35)
         errors.push("La température de fermentation doit être comprise entre 4 et 35°C. Vérifiez la valeur saisie.");
@@ -82,7 +102,7 @@ export function validateStep(
       }
       break;
     }
-    case 7: {
+    case 8: {
       if (
         recipe.conditioning.mode === "bottles" &&
         (recipe.conditioning.sugarPerLiter < 4 || recipe.conditioning.sugarPerLiter > 10)
@@ -96,11 +116,13 @@ export function validateStep(
   return { valid: errors.length === 0, errors };
 }
 
+const TOTAL_STEPS = 10;
+
 export function validateAllSteps(
   recipe: Recipe,
   equipmentData: Equipment[]
 ): StepValidation[] {
-  return Array.from({ length: 9 }, (_, i) => validateStep(i, recipe, equipmentData));
+  return Array.from({ length: TOTAL_STEPS }, (_, i) => validateStep(i, recipe, equipmentData));
 }
 
 export function isStepAccessible(

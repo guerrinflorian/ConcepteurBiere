@@ -69,6 +69,66 @@ export interface AdjunctAddition {
   amount: number; // en kg
 }
 
+// === Types pour l'eau et les volumes ===
+
+export type WaterSourceType = "robinet" | "bouteille" | "osmosee" | "inconnu";
+export type BrewingMethod = "kit" | "extrait" | "tout_grain";
+
+export interface RecipeWater {
+  sourceType: WaterSourceType;
+  notes: string;
+  mashWaterL: number;
+  spargeWaterL: number;
+  totalWaterL: number;
+  preBoilVolumeL: number;
+  postBoilVolumeL: number;
+  lossesL: number;
+}
+
+export interface RecipeProcess {
+  batchVolumeL: number;
+  boilTimeMin: number;
+  boilOffRateLPerHour: number;
+}
+
+export interface RecipeEquipmentInfo {
+  kettleCapacityL: number;
+  hasChiller: boolean;
+  hasHydrometer: boolean;
+  hasTempControl: boolean;
+}
+
+export interface WaterPlan {
+  mashWaterL: number;
+  spargeWaterL: number;
+  totalWaterL: number;
+  preBoilVolumeL: number;
+  postBoilVolumeL: number;
+  lossesL: number;
+}
+
+// === Types pour la procédure de fabrication ===
+
+export interface ProcedureStep {
+  id: string;
+  title: string;
+  durationMin?: number;
+  details: string[];
+  tips?: string[];
+  warnings?: string[];
+}
+
+// === Types pour les vérifications de cohérence ===
+
+export type CheckLevel = "ok" | "info" | "warn" | "danger";
+
+export interface ConsistencyCheck {
+  id: string;
+  level: CheckLevel;
+  title: string;
+  message: string;
+}
+
 // === Types pour la recette (état du wizard) ===
 
 export type UserType = "homebrew" | "pro";
@@ -82,6 +142,7 @@ export interface RecipeParams {
   recipeName: string;
   volume: number; // en litres
   styleId: string;
+  method: BrewingMethod;
 }
 
 export interface MaltAddition {
@@ -123,6 +184,9 @@ export interface Recipe {
   hops: HopAddition[];
   adjuncts: AdjunctAddition[];
   yeastId: string;
+  water: RecipeWater;
+  process: RecipeProcess;
+  equipmentInfo: RecipeEquipmentInfo;
   mashing: RecipeMashing;
   fermentation: RecipeFermentation;
   conditioning: RecipeConditioning;
@@ -159,7 +223,7 @@ export interface CalculatedValues {
 
 // État initial d'une recette vide
 export const emptyRecipe: Recipe = {
-  version: 1,
+  version: 2,
   profile: {
     userType: "homebrew",
     selectedEquipment: [],
@@ -168,11 +232,33 @@ export const emptyRecipe: Recipe = {
     recipeName: "",
     volume: 20,
     styleId: "",
+    method: "tout_grain",
   },
   malts: [{ maltId: "", amount: 0 }],
   hops: [{ hopId: "", amount: 0, timing: 60 }],
   adjuncts: [],
   yeastId: "",
+  water: {
+    sourceType: "robinet",
+    notes: "",
+    mashWaterL: 0,
+    spargeWaterL: 0,
+    totalWaterL: 0,
+    preBoilVolumeL: 0,
+    postBoilVolumeL: 0,
+    lossesL: 0,
+  },
+  process: {
+    batchVolumeL: 20,
+    boilTimeMin: 60,
+    boilOffRateLPerHour: 2.0,
+  },
+  equipmentInfo: {
+    kettleCapacityL: 0,
+    hasChiller: false,
+    hasHydrometer: false,
+    hasTempControl: false,
+  },
   mashing: {
     mashTemp: 66,
     boilDuration: 60,

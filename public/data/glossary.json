@@ -1,0 +1,218 @@
+[
+  {
+    "term": "OG",
+    "fullName": "Original Gravity (Densité Initiale)",
+    "category": "mesure",
+    "definition": "La densité du moût avant fermentation, mesurée avec un densimètre ou un réfractomètre. Elle indique la quantité de sucres dissous dans le moût. Plus il y a de sucres, plus la bière sera potentiellement alcoolisée.",
+    "whyItMatters": "L'OG permet de prédire le taux d'alcool final et de vérifier que l'empâtage a bien extrait les sucres des grains. Si l'OG est trop basse, la bière sera faible en alcool et en corps.",
+    "typicalValues": "1.030–1.045 (bière légère), 1.045–1.060 (standard), 1.060–1.080 (forte), 1.080+ (très forte)",
+    "example": "Une Blonde typique a une OG de ~1.045. Cela signifie que le moût est 4,5 % plus dense que l'eau pure."
+  },
+  {
+    "term": "FG",
+    "fullName": "Final Gravity (Densité Finale)",
+    "category": "mesure",
+    "definition": "La densité de la bière après fermentation. La levure a consommé une partie des sucres et les a transformés en alcool et CO₂. La FG indique les sucres résiduels qui restent dans la bière.",
+    "whyItMatters": "Une FG basse signifie une bière sèche (peu de sucres résiduels). Une FG haute signifie une bière plus ronde et sucrée. Une FG stable pendant 2 jours consécutifs confirme que la fermentation est terminée.",
+    "typicalValues": "1.005–1.010 (sèche), 1.010–1.015 (moyenne), 1.015–1.025 (douce/ronde)",
+    "example": "Si OG = 1.050 et FG = 1.010, la levure a consommé 80 % des sucres (atténuation de 80 %)."
+  },
+  {
+    "term": "ABV",
+    "fullName": "Alcohol By Volume (Taux d'Alcool)",
+    "category": "mesure",
+    "definition": "Le pourcentage d'alcool par volume dans la bière finie, calculé à partir de la différence entre OG et FG. Formule simplifiée : ABV ≈ (OG - FG) × 131.25.",
+    "whyItMatters": "C'est l'information la plus parlante pour le consommateur. Permet de classer la bière (session, standard, forte) et de respecter les obligations légales d'étiquetage.",
+    "typicalValues": "3–4 % (session), 4–6 % (standard), 6–8 % (forte), 8–12 %+ (très forte)",
+    "example": "Une Pale Ale à OG 1.052 et FG 1.012 donne ABV ≈ (1.052 - 1.012) × 131.25 ≈ 5,3 %."
+  },
+  {
+    "term": "IBU",
+    "fullName": "International Bitterness Units (Unités d'Amertume)",
+    "category": "mesure",
+    "definition": "Mesure standardisée de l'amertume apportée par le houblon. L'amertume provient de l'isomérisation des acides alpha du houblon pendant l'ébullition. Plus la valeur est élevée, plus la bière est amère.",
+    "whyItMatters": "L'amertume équilibre le sucré des malts. Trop d'IBU donne une bière agressive, pas assez donne une bière sucrée et écœurante. L'équilibre IBU/OG détermine le profil gustatif.",
+    "typicalValues": "5–15 (légère, Blanche), 15–30 (équilibrée, Lager), 30–50 (amère, Pale Ale), 50–70+ (très amère, IPA/DIPA)",
+    "example": "Une IPA à 60 IBU est nettement amère. Une Blanche à 12 IBU est très douce. 25 g de Saaz à 60 min dans 20 L donnent environ 16 IBU."
+  },
+  {
+    "term": "EBC",
+    "fullName": "European Brewery Convention (Couleur de la Bière)",
+    "category": "mesure",
+    "definition": "Échelle de mesure de la couleur de la bière, standard en Europe. Calculée à partir de la couleur des malts et de leur proportion dans la recette. Plus le nombre est élevé, plus la bière est foncée.",
+    "whyItMatters": "La couleur donne une première impression visuelle et est souvent corrélée au profil de saveur. Des malts torréfiés (couleur foncée) apportent des notes de café et chocolat.",
+    "typicalValues": "4–8 (très pâle/Pilsner), 8–15 (blonde), 15–25 (dorée), 25–35 (ambrée), 35–50 (cuivrée), 50–70 (brune), 70+ (noire/Stout)",
+    "example": "Une Stout à 80 EBC est noire opaque. Une Pilsner à 6 EBC est jaune paille."
+  },
+  {
+    "term": "SRM",
+    "fullName": "Standard Reference Method",
+    "category": "mesure",
+    "definition": "Échelle de couleur américaine. Conversion : EBC ≈ SRM × 1.97. Utilisée principalement aux États-Unis. Les valeurs sont environ deux fois plus petites que les EBC.",
+    "whyItMatters": "Si vous suivez une recette américaine, les couleurs seront en SRM. Multipliez par environ 2 pour obtenir l'EBC et comparer avec les standards européens.",
+    "typicalValues": "2–4 (pâle), 4–8 (dorée), 8–15 (ambrée), 15–25 (brune), 25+ (noire)",
+    "example": "10 SRM ≈ 20 EBC, soit une bière dorée tirant sur l'ambrée."
+  },
+  {
+    "term": "Plato",
+    "fullName": "Degrés Plato (°P)",
+    "category": "mesure",
+    "definition": "Autre façon d'exprimer la densité du moût, en pourcentage de sucre en masse. 1 °P = 1 gramme de sucre pour 100 grammes de moût. Échelle préférée des brasseurs professionnels et en Europe continentale.",
+    "whyItMatters": "Permet de visualiser directement la teneur en sucre du moût. Plus intuitif que l'OG pour beaucoup de brasseurs. Utilisé sur les étiquettes de nombreuses bières belges et tchèques.",
+    "typicalValues": "8–12 °P (standard), 12–18 °P (forte), 18 °P+ (très forte)",
+    "example": "Une OG de 1.048 ≈ 12 °P, soit 12 % de sucre en masse. Une bière 'douze degrés' au sens brassicole."
+  },
+  {
+    "term": "CO₂ volumes",
+    "fullName": "Volumes de CO₂ (Carbonatation)",
+    "category": "mesure",
+    "definition": "Mesure de la quantité de gaz carbonique dissous dans la bière. 1 volume = 1 litre de CO₂ (à pression atmosphérique) dissous dans 1 litre de bière. Détermine la pétillance de la bière.",
+    "whyItMatters": "La carbonatation influence la sensation en bouche (pétillance), la mousse et la perception des saveurs. Chaque style a un niveau de carbonatation idéal. Trop de CO₂ = risque d'explosion des bouteilles.",
+    "typicalValues": "1.5–2.0 (peu pétillante, cask ale), 2.0–2.5 (standard), 2.5–3.0 (pétillante, Blanche), 3.0–4.0+ (très pétillante, Saison/Lambic)",
+    "example": "Avec 7 g/L de sucre, on obtient environ 2,6 volumes de CO₂ — un pétillant standard agréable."
+  },
+  {
+    "term": "Atténuation",
+    "fullName": "Atténuation apparente",
+    "category": "mesure",
+    "definition": "Le pourcentage de sucres que la levure a transformés en alcool. Formule : Atténuation = (OG - FG) / (OG - 1) × 100. Plus l'atténuation est élevée, plus la bière est sèche et alcoolisée.",
+    "whyItMatters": "Le choix de la levure et la température d'empâtage influencent l'atténuation. Une levure à haute atténuation donnera une bière plus sèche. La combinaison levure + empâtage est un levier majeur du profil de la bière.",
+    "typicalValues": "60–70 % (basse, bière ronde), 70–80 % (standard), 80–90 % (haute, bière sèche), 90 %+ (très haute, Saison)",
+    "example": "US-05 à 81 % d'atténuation : OG 1.050 → FG ≈ 1.010 → bière moyennement sèche à 5,3 % ABV."
+  },
+  {
+    "term": "Empâtage",
+    "fullName": "Empâtage (Mashing)",
+    "category": "processus",
+    "definition": "Étape où les grains concassés sont mélangés à de l'eau chaude (60-72 °C) pour activer les enzymes (amylases) qui convertissent l'amidon en sucres fermentescibles. Durée standard : 60 minutes.",
+    "whyItMatters": "La température d'empâtage détermine le ratio entre sucres fermentescibles (→ alcool) et non-fermentescibles (→ corps/douceur). C'est un levier majeur du profil de la bière.",
+    "typicalValues": "60–72 °C pendant 60 minutes. Ratio eau/grain : 2.5–3.0 L/kg.",
+    "example": "Empâtage à 64 °C = bière sèche et alcoolisée. Empâtage à 68 °C = bière plus ronde et moelleuse."
+  },
+  {
+    "term": "Ébullition",
+    "fullName": "Ébullition (Boil)",
+    "category": "processus",
+    "definition": "Le moût filtré est porté à ébullition vigoureuse pendant 60 à 90 minutes. On y ajoute le houblon à différents moments. L'ébullition stérilise le moût, extrait l'amertume du houblon et élimine le DMS.",
+    "whyItMatters": "Sans ébullition : pas d'amertume, risque d'infection, goûts parasites (DMS). C'est aussi le moment où se fixent les arômes du houblon. Le couvercle doit rester ouvert pour que le DMS s'évapore.",
+    "typicalValues": "60 min (standard), 90 min (Pilsner, bière forte avec beaucoup de malt Pilsner)",
+    "example": "Ébullition 60 min avec houblon à T-60 (amertume), T-15 et T-5 (arôme). Évaporation d'environ 2 L."
+  },
+  {
+    "term": "Dry-hop",
+    "fullName": "Houblonnage à froid (Dry Hopping)",
+    "category": "processus",
+    "definition": "Ajout de houblon directement dans le fermenteur, après la fermentation primaire. Le houblon n'est pas bouilli, donc il n'apporte pas d'amertume mais un maximum d'arômes : agrumes, fruits tropicaux, résine, fleurs.",
+    "whyItMatters": "Technique incontournable pour les IPA et NEIPA modernes. Permet d'obtenir des arômes de houblon intenses et frais sans amertume excessive. Durée typique : 3-7 jours.",
+    "example": "50-100 g de Citra en dry-hop pendant 4 jours pour une NEIPA aux arômes de mangue et pamplemousse."
+  },
+  {
+    "term": "Refermentation",
+    "fullName": "Refermentation en bouteille",
+    "category": "processus",
+    "definition": "Ajout d'une petite quantité de sucre au moment de l'embouteillage. La levure résiduelle consomme ce sucre et produit du CO₂ qui carbonate la bière naturellement dans la bouteille fermée.",
+    "whyItMatters": "C'est la méthode traditionnelle de carbonatation pour le brassage amateur. Simple et efficace, elle ne nécessite pas d'équipement de carbonatation forcée. Attention au dosage : trop de sucre = bouteilles qui explosent.",
+    "typicalValues": "5–8 g/L de sucre pour une carbonatation standard. Durée : 2-3 semaines à ~20 °C.",
+    "example": "7 g/L de sucre → ~2,6 volumes CO₂ → pétillance standard. 120 g de sucre pour 20 L de bière. Attendre 3 semaines."
+  },
+  {
+    "term": "Lagering",
+    "fullName": "Garde à froid (Lagering)",
+    "category": "processus",
+    "definition": "Maturation prolongée à basse température (0-4 °C) pendant plusieurs semaines, caractéristique des bières Lager. Clarifie la bière, adoucit les saveurs et élimine les goûts 'verts' (acétaldéhyde, diacétyle).",
+    "whyItMatters": "Donne aux Lagers leur goût propre et net caractéristique. Sans lagering, une lager sera trouble et pourra avoir des saveurs vertes indésirables.",
+    "typicalValues": "0–4 °C pendant 4–8 semaines (traditionnellement jusqu'à 3-6 mois pour certains styles)",
+    "example": "Après fermentation à 12 °C pendant 14 jours, abaisser à 2 °C et maintenir 6 semaines. Résultat : bière cristalline au goût propre."
+  },
+  {
+    "term": "Malt de base",
+    "fullName": "Malt de base (Base Malt)",
+    "category": "ingredient",
+    "definition": "Le malt principal qui constitue 60 à 100 % du grain total. Il fournit les enzymes nécessaires à la conversion de l'amidon et la majorité des sucres fermentescibles. C'est la fondation de toute recette.",
+    "whyItMatters": "Sans malt de base, pas de conversion enzymatique, pas de sucres, pas de bière. Le choix du malt de base influence la couleur de base et le profil de saveur fondamental.",
+    "typicalValues": "60–100 % du grain total. Pour 20 L : 3–6 kg.",
+    "example": "Pilsner Malt pour les blondes et lagers. Pale Ale Malt pour les ales anglaises et américaines. Munich pour les bières maltées."
+  },
+  {
+    "term": "Malt spécial",
+    "fullName": "Malt spécial / Malt de caractère",
+    "category": "ingredient",
+    "definition": "Malts ajoutés en petite quantité (5-20 % du grain total) pour apporter couleur, corps et saveurs spécifiques : caramel, biscuit, chocolat, café, torréfié, noisette, etc.",
+    "whyItMatters": "Ce sont eux qui donnent sa personnalité à la bière. Sans malts spéciaux, la bière serait pâle et relativement neutre. Chaque malt spécial apporte des saveurs distinctes.",
+    "typicalValues": "5–20 % du grain total. Rarement plus de 1 kg pour 20 L.",
+    "example": "Crystal 60 pour du caramel, Chocolate Malt pour du chocolat/café, Biscuit pour des notes de biscuit sec."
+  },
+  {
+    "term": "Acide alpha",
+    "fullName": "Acide Alpha (Alpha Acid / AA %)",
+    "category": "ingredient",
+    "definition": "Le taux d'acide alpha d'un houblon, exprimé en pourcentage. C'est la substance qui, une fois isomérisée par l'ébullition, donne l'amertume à la bière. Chaque variété de houblon a un taux caractéristique.",
+    "whyItMatters": "Plus le pourcentage d'AA est élevé, plus le houblon est amérisant pour une même quantité. C'est le paramètre clé du calcul des IBU. Un houblon aromatique (bas AA) sera utilisé en fin d'ébullition, un amérisant (haut AA) en début.",
+    "typicalValues": "3–6 % (aromatique), 6–10 % (mixte), 10–15 %+ (amérisant)",
+    "example": "Saaz à 3,5 % AA = houblon aromatique noble. Columbus à 15 % AA = houblon très amérisant. Pour la même amertume, il faut 4x plus de Saaz que de Columbus."
+  },
+  {
+    "term": "Levure",
+    "fullName": "Levure (Yeast)",
+    "category": "ingredient",
+    "definition": "Micro-organisme (Saccharomyces cerevisiae pour les ales, S. pastorianus pour les lagers) qui consomme les sucres du moût et produit de l'alcool, du CO₂ et des composés aromatiques (esters, phénols).",
+    "whyItMatters": "La levure est responsable de jusqu'à 50 % du profil aromatique de la bière. Le choix de la souche influence l'atténuation, les esters (fruité), les phénols (épicé), la floculation (clarté) et la température de fermentation.",
+    "example": "US-05 = levure neutre et fiable pour les ales. Belle Saison = saveurs poivrées et épicées. WB-06 = banane et clou de girofle pour les Blanches."
+  },
+  {
+    "term": "DMS",
+    "fullName": "Diméthylsulfure",
+    "category": "defaut",
+    "definition": "Composé chimique indésirable qui donne un goût de maïs cuit, de légume cuit ou de chou. Produit pendant l'ébullition à partir du précurseur SMM (S-méthylméthionine), présent en grande quantité dans le malt Pilsner.",
+    "whyItMatters": "Un des défauts les plus courants chez les débutants. Se prévient par une ébullition vigoureuse (60+ min, 90 min pour Pilsner), couvercle ouvert, et refroidissement rapide après ébullition.",
+    "example": "Si votre blonde a un goût de maïs en conserve, le DMS est la cause probable. Solution : ébullition vigoureuse 60+ min, couvercle ouvert, refroidissement rapide."
+  },
+  {
+    "term": "Oxydation",
+    "fullName": "Oxydation de la bière",
+    "category": "defaut",
+    "definition": "Altération causée par le contact de la bière avec l'oxygène après la fermentation. Produit des goûts de carton mouillé, de sherry ou de fruit trop mûr. L'oxygène est l'ennemi de la bière finie.",
+    "whyItMatters": "Avant fermentation, l'oxygène est souhaité (la levure en a besoin pour démarrer). Après fermentation, tout contact avec l'air dégrade la bière progressivement. Les transferts et l'embouteillage sont les moments les plus risqués.",
+    "example": "Transférez en douceur avec un siphon (pas de splash). Remplissez les bouteilles jusqu'au goulot. Évitez les transferts inutiles. Purgez au CO₂ si possible."
+  },
+  {
+    "term": "Infection",
+    "fullName": "Infection / Contamination bactérienne",
+    "category": "defaut",
+    "definition": "Présence de bactéries ou levures sauvages indésirables dans le moût ou la bière. Donne des saveurs acides, aigres, vinaigrées, ou des textures visqueuses. Cause principale de brassins ratés.",
+    "whyItMatters": "Se prévient par un nettoyage et une désinfection rigoureux de tout ce qui touche le moût après l'ébullition. Avant l'ébullition, pas besoin de désinfecter (la chaleur stérilise).",
+    "example": "Symptômes : pellicule blanche sur la bière, goût aigre inattendu, bulles du barboteur après 3+ semaines. Prévention : Chemipro, Star San ou équivalent sur tout le matériel post-ébullition."
+  },
+  {
+    "term": "Esters",
+    "fullName": "Esters (arômes fruités)",
+    "category": "defaut",
+    "definition": "Composés aromatiques produits par la levure pendant la fermentation. Donnent des arômes de banane, pomme, poire, fruits tropicaux. Souhaités dans certains styles (Blanche, Saison), indésirables dans d'autres (Lager, Pilsner).",
+    "whyItMatters": "Une fermentation trop chaude produit trop d'esters, ce qui peut donner des notes de solvant. Le contrôle de la température est essentiel pour maîtriser le profil aromatique. Chaque degré compte.",
+    "example": "WB-06 à 22 °C = banane prononcée (souhaité pour une Blanche). US-05 à 22 °C = esters fruités légers (neutre). La même levure à 25 °C = esters excessifs."
+  },
+  {
+    "term": "Faux-goûts",
+    "fullName": "Off-flavors (Faux-goûts)",
+    "category": "defaut",
+    "definition": "Terme générique pour toutes les saveurs indésirables dans la bière : DMS (maïs cuit), diacétyle (beurre), acétaldéhyde (pomme verte), phénols chlorés (médicament), esters excessifs (solvant), oxydation (carton).",
+    "whyItMatters": "Chaque faux-goût a une cause identifiable et une solution. Apprendre à les reconnaître et les prévenir est essentiel pour progresser en brassage. L'assistant ConcepteurBière détecte les risques les plus courants.",
+    "example": "Diacétyle (beurre) → laisser la levure 'nettoyer' en fin de fermentation (diacetyl rest 2-3 jours à température). Acétaldéhyde (pomme verte) → fermentation trop courte, laisser plus de temps."
+  },
+  {
+    "term": "Densimètre",
+    "fullName": "Densimètre / Hydromètre",
+    "category": "equipement",
+    "definition": "Instrument en verre qui flotte dans le moût ou la bière et indique la densité du liquide. Permet de mesurer l'OG et la FG, donc de calculer l'ABV et de confirmer que la fermentation est terminée.",
+    "whyItMatters": "Sans densimètre, on brasse 'à l'aveugle'. C'est l'outil le plus important après le fermenteur. Il permet de savoir quand embouteiller en toute sécurité (FG stable = fermentation terminée = pas de surpression).",
+    "example": "Deux mesures de FG identiques à 48 h d'intervalle = fermentation terminée, embouteillage possible. Nécessite environ 100 mL de moût par mesure."
+  },
+  {
+    "term": "Refroidisseur",
+    "fullName": "Refroidisseur de moût (Wort Chiller)",
+    "category": "equipement",
+    "definition": "Serpentin en cuivre ou inox plongé dans le moût chaud, dans lequel circule de l'eau froide. Permet de refroidir le moût de 100 °C à la température d'ensemencement (18-22 °C) en 15-30 minutes.",
+    "whyItMatters": "Un refroidissement rapide réduit le risque d'infection (moins de temps dans la zone 30-60 °C où les bactéries prolifèrent), limite la formation de DMS, et produit un bon 'cold break' (précipitation des protéines = bière plus claire).",
+    "example": "Avec un serpentin cuivre de 7,5 m, refroidissement de 20 L en environ 20 min. Sans refroidisseur : bain de glace, compter 45-60 min pour 20 L."
+  }
+]

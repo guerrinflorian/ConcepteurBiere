@@ -98,6 +98,52 @@ export default function Step1Params() {
         )}
       </div>
 
+      {/* Méthode de brassage */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Méthode de brassage
+        </label>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {[
+            {
+              value: "tout_grain" as const,
+              label: "Tout-grain",
+              icon: "🌾",
+              desc: "Empâtage des grains, filtration, ébullition. Le plus complet.",
+            },
+            {
+              value: "extrait" as const,
+              label: "Extrait",
+              icon: "🫙",
+              desc: "Extrait de malt (sirop ou poudre) + ébullition + houblon.",
+            },
+            {
+              value: "kit" as const,
+              label: "Kit",
+              icon: "📦",
+              desc: "Kit pré-houblonné. Simplement diluer, ajouter la levure et fermenter.",
+            },
+          ].map((m) => (
+            <button
+              key={m.value}
+              type="button"
+              onClick={() => updateParams({ method: m.value })}
+              className={`p-3 rounded-xl border-2 text-left transition-all ${
+                params.method === m.value
+                  ? "border-amber-500 bg-amber-50 shadow-sm"
+                  : "border-gray-200 bg-white hover:border-amber-300"
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">{m.icon}</span>
+                <span className="font-semibold text-sm">{m.label}</span>
+              </div>
+              <p className="text-xs text-gray-500">{m.desc}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <Tip>
         Le volume correspond au volume final souhaité en fermenteur. Prévoyez environ
         10–15% de plus en cuve pour compenser les pertes (grains, évaporation, trub).

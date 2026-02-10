@@ -14,6 +14,9 @@ import {
   UiMode,
   AssistantState,
   emptyAssistant,
+  RecipeWater,
+  RecipeProcess,
+  RecipeEquipmentInfo,
 } from "@/lib/types";
 import { calculateAll } from "@/lib/calculations";
 import { StepValidation, validateAllSteps, isStepAccessible as checkStepAccessible } from "@/lib/validation";
@@ -22,6 +25,11 @@ interface RecipeContextType {
   recipe: Recipe;
   setRecipe: React.Dispatch<React.SetStateAction<Recipe>>;
   updateRecipe: (partial: Partial<Recipe>) => void;
+
+  // Mutators spécialisés
+  setWater: (partial: Partial<RecipeWater>) => void;
+  setProcess: (partial: Partial<RecipeProcess>) => void;
+  setEquipmentInfo: (partial: Partial<RecipeEquipmentInfo>) => void;
 
   // Données de référence chargées depuis les API
   equipmentData: Equipment[];
@@ -63,6 +71,10 @@ interface RecipeContextType {
   // Glossaire
   showGlossary: boolean;
   setShowGlossary: (show: boolean) => void;
+
+  // Page d'accueil
+  showWizard: boolean;
+  setShowWizard: (show: boolean) => void;
 }
 
 const RecipeContext = createContext<RecipeContextType | null>(null);
@@ -73,7 +85,7 @@ export function useRecipe() {
   return ctx;
 }
 
-const TOTAL_STEPS = 9;
+const TOTAL_STEPS = 10;
 
 export function RecipeProvider({ children }: { children: React.ReactNode }) {
   const [recipe, setRecipe] = useState<Recipe>(emptyRecipe);
@@ -81,6 +93,7 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
   const [uiMode, setUiMode] = useState<UiMode>("beginner");
   const [assistant, setAssistant] = useState<AssistantState>(emptyAssistant);
   const [showGlossary, setShowGlossary] = useState(false);
+  const [showWizard, setShowWizard] = useState(false);
 
   // Données de référence
   const [equipmentData, setEquipmentData] = useState<Equipment[]>([]);
@@ -124,6 +137,27 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
     setRecipe((prev) => ({ ...prev, ...partial }));
   }, []);
 
+  const setWater = useCallback((partial: Partial<RecipeWater>) => {
+    setRecipe((prev) => ({
+      ...prev,
+      water: { ...prev.water, ...partial },
+    }));
+  }, []);
+
+  const setProcess = useCallback((partial: Partial<RecipeProcess>) => {
+    setRecipe((prev) => ({
+      ...prev,
+      process: { ...prev.process, ...partial },
+    }));
+  }, []);
+
+  const setEquipmentInfo = useCallback((partial: Partial<RecipeEquipmentInfo>) => {
+    setRecipe((prev) => ({
+      ...prev,
+      equipmentInfo: { ...prev.equipmentInfo, ...partial },
+    }));
+  }, []);
+
   // Calculer les valeurs en temps réel
   const yeast = yeastsData.find((y) => y.id === recipe.yeastId);
   const calculated = calculateAll(
@@ -160,7 +194,7 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
     try {
       const parsed = JSON.parse(json);
       // Vérification basique de la structure
-      if (!parsed.version || !parsed.profile || !parsed.params) {
+      if (!parsed.profile && !parsed.params) {
         return false;
       }
       // Fusionner avec les valeurs par défaut pour éviter les champs manquants
@@ -169,13 +203,17 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
         ...parsed,
         profile: { ...emptyRecipe.profile, ...parsed.profile },
         params: { ...emptyRecipe.params, ...parsed.params },
+        water: { ...emptyRecipe.water, ...parsed.water },
+        process: { ...emptyRecipe.process, ...parsed.process },
+        equipmentInfo: { ...emptyRecipe.equipmentInfo, ...parsed.equipmentInfo },
         mashing: { ...emptyRecipe.mashing, ...parsed.mashing },
         fermentation: { ...emptyRecipe.fermentation, ...parsed.fermentation },
         conditioning: { ...emptyRecipe.conditioning, ...parsed.conditioning },
         adjuncts: parsed.adjuncts ?? [],
       };
       setRecipe(merged);
-      setCurrentStep(8); // Aller au résumé
+      setCurrentStep(TOTAL_STEPS - 1); // Aller au résumé
+      setShowWizard(true);
       return true;
     } catch {
       return false;
@@ -186,6 +224,7 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
     setRecipe(emptyRecipe);
     setCurrentStep(0);
     setAssistant(emptyAssistant);
+    setShowWizard(false);
   }, []);
 
   const toggleHygieneCheck = useCallback((checkId: string) => {
@@ -215,6 +254,9 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
         recipe,
         setRecipe,
         updateRecipe,
+        setWater,
+        setProcess,
+        setEquipmentInfo,
         equipmentData,
         maltsData,
         hopsData,
@@ -240,6 +282,8 @@ export function RecipeProvider({ children }: { children: React.ReactNode }) {
         resetAssistant,
         showGlossary,
         setShowGlossary,
+        showWizard,
+        setShowWizard,
       }}
     >
       {children}
