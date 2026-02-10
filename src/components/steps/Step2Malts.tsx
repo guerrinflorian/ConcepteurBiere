@@ -190,7 +190,7 @@ export default function Step2Malts() {
       )}
 
       {/* Section Adjuvants */}
-      <div className="border border-gray-200 rounded-lg overflow-hidden">
+      <div className="border border-gray-200 rounded-lg overflow-visible">
         <button
           onClick={() => setShowAdjuncts(!showAdjuncts)}
           className="w-full px-4 py-3 bg-gray-50 text-left text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors flex items-center justify-between"

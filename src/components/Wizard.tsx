@@ -178,7 +178,7 @@ export default function Wizard() {
         className="flex flex-wrap items-center justify-center gap-2 mb-4 no-print"
       >
         {/* Toggle Débutant / Expert */}
-        <div className="flex items-center bg-white rounded-full border border-gray-200 overflow-hidden shadow-sm">
+        <div className="flex items-center bg-white rounded-full border border-gray-200 overflow-visible shadow-sm">
           <button
             type="button"
             onClick={() => setUiMode("beginner")}

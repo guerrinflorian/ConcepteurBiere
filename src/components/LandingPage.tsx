@@ -70,7 +70,7 @@ export default function LandingPage() {
             transition={{ delay: 0.3, duration: 0.4 }}
             whileHover={{ scale: 1.03, y: -4 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative p-8 rounded-2xl bg-white border-2 border-amber-200 hover:border-amber-400 shadow-lg hover:shadow-xl transition-all text-left cursor-pointer overflow-hidden"
+            className="group relative p-8 rounded-2xl bg-white border-2 border-amber-200 hover:border-amber-400 shadow-lg hover:shadow-xl transition-all text-left cursor-pointer overflow-visible"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity" />
             <div className="relative">
@@ -99,7 +99,7 @@ export default function LandingPage() {
             transition={{ delay: 0.4, duration: 0.4 }}
             whileHover={{ scale: 1.03, y: -4 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative p-8 rounded-2xl bg-white border-2 border-gray-200 hover:border-amber-400 shadow-lg hover:shadow-xl transition-all text-left cursor-pointer overflow-hidden"
+            className="group relative p-8 rounded-2xl bg-white border-2 border-gray-200 hover:border-amber-400 shadow-lg hover:shadow-xl transition-all text-left cursor-pointer overflow-visible"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gray-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity" />
             <div className="relative">

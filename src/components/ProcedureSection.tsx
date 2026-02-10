@@ -25,7 +25,7 @@ export default function ProcedureSection({
         {steps.map((step, index) => (
           <div
             key={step.id}
-            className="border border-gray-200 rounded-xl overflow-hidden bg-white"
+            className="border border-gray-200 rounded-xl overflow-visible bg-white"
           >
             {/* Header */}
             <div className="flex items-center gap-3 p-4 bg-gray-50 border-b border-gray-100">
