@@ -13,7 +13,7 @@ import { isBeginner } from "@/lib/uiMode";
  * - Clic sur toute la ligne pour cocher/décocher
  */
 export default function HygieneChecklist({ stepId }: { stepId: string }) {
-  const { uiMode, assistant, toggleHygieneCheck, recipe, equipmentData } = useRecipe();
+  const { uiMode, assistant, recipe, equipmentData } = useRecipe();
   const beginner = isBeginner(uiMode);
   const [isOpen, setIsOpen] = useState(beginner);
 
@@ -43,36 +43,20 @@ export default function HygieneChecklist({ stepId }: { stepId: string }) {
 
   if (filteredItems.length === 0) return null;
 
-  const checkedCount = filteredItems.filter((item) => assistant.hygieneChecks[item.id]).length;
-  const allChecked = checkedCount === filteredItems.length;
-  const progressPercent = (checkedCount / filteredItems.length) * 100;
-
   return (
-    <div
-      className={`mt-4 rounded-xl overflow-hidden transition-all ${
-        allChecked
-          ? "border-2 border-teal-300 bg-teal-50/80"
-          : "border-2 border-teal-200/60 bg-gradient-to-br from-teal-50/50 to-white"
-      }`}
-    >
+    <div className="mt-4 rounded-xl border-2 border-teal-200/60 bg-gradient-to-br from-teal-50/50 to-white">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-teal-100/30 transition-colors"
       >
         <div className="flex items-center gap-2.5">
-          <span className="text-lg">{allChecked ? "✅" : "🧹"}</span>
+          <span className="text-lg">🧹</span>
           <span className="text-sm font-semibold text-teal-800">
             {stepChecklist.title}
           </span>
-          <span
-            className={`text-xs px-2.5 py-0.5 rounded-full font-bold badge-pop ${
-              allChecked
-                ? "bg-teal-500 text-white"
-                : "bg-teal-100 text-teal-700"
-            }`}
-          >
-            {checkedCount}/{filteredItems.length}
+          <span className="text-xs px-2.5 py-0.5 rounded-full font-bold bg-teal-100 text-teal-700">
+            Conseils d'hygiène
           </span>
         </div>
         <motion.span
@@ -83,18 +67,6 @@ export default function HygieneChecklist({ stepId }: { stepId: string }) {
           ▼
         </motion.span>
       </button>
-
-      {/* Progress bar */}
-      <div className="px-4 pb-0">
-        <div className="h-1 bg-teal-100 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-teal-400 to-teal-500"
-            initial={{ width: 0 }}
-            animate={{ width: `${progressPercent}%` }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-          />
-        </div>
-      </div>
 
       <AnimatePresence>
         {isOpen && (
@@ -118,27 +90,8 @@ export default function HygieneChecklist({ stepId }: { stepId: string }) {
               )}
 
               {filteredItems.map((item, index) => (
-                <ChecklistItemRow
-                  key={item.id}
-                  item={item}
-                  checked={!!assistant.hygieneChecks[item.id]}
-                  onToggle={() => toggleHygieneCheck(item.id)}
-                  beginner={beginner}
-                  index={index}
-                />
+                <ChecklistItemRow key={item.id} item={item} beginner={beginner} index={index} />
               ))}
-
-              {allChecked && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-2"
-                >
-                  <span className="text-sm font-semibold text-teal-600">
-                    Tous les points d'hygiène sont validés !
-                  </span>
-                </motion.div>
-              )}
             </div>
           </motion.div>
         )}
@@ -149,14 +102,10 @@ export default function HygieneChecklist({ stepId }: { stepId: string }) {
 
 function ChecklistItemRow({
   item,
-  checked,
-  onToggle,
   beginner,
   index,
 }: {
   item: ChecklistItem;
-  checked: boolean;
-  onToggle: () => void;
   beginner: boolean;
   index: number;
 }) {
@@ -167,32 +116,15 @@ function ChecklistItemRow({
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
-      className={`rounded-xl border-2 transition-all cursor-pointer select-none ${
-        checked
-          ? "bg-teal-50 border-teal-300 shadow-sm shadow-teal-100"
-          : item.severity === "warn"
-          ? "bg-white border-orange-200 hover:border-orange-300 hover:shadow-sm"
-          : "bg-white border-gray-200 hover:border-teal-200 hover:shadow-sm"
+      className={`rounded-xl border-2 transition-all select-none ${
+        item.severity === "warn" ? "bg-white border-orange-200" : "bg-white border-gray-200"
       }`}
-      onClick={onToggle}
     >
       <div className="flex items-start gap-3 p-3">
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={onToggle}
-          onClick={(e) => e.stopPropagation()}
-          className="hygiene-check mt-0.5"
-          readOnly={false}
-        />
         <div className="flex-1 min-w-0">
-          <span
-            className={`text-sm font-medium leading-snug ${
-              checked ? "text-teal-700 line-through opacity-70" : "text-gray-800"
-            }`}
-          >
+          <span className={`text-sm font-medium leading-snug text-gray-800`}>
             {item.label}
-            {item.severity === "warn" && !checked && (
+            {item.severity === "warn" && (
               <span className="ml-1.5 inline-flex items-center gap-0.5 text-orange-500 text-[10px] font-bold bg-orange-50 px-1.5 py-0.5 rounded-full">
                 Important
               </span>
@@ -202,7 +134,7 @@ function ChecklistItemRow({
       </div>
 
       {/* Détails : Pourquoi + Comment */}
-      <div onClick={(e) => e.stopPropagation()}>
+      <div>
         {beginner ? (
           <div className="px-3 pb-3 pl-12 space-y-1">
             <p className="text-xs text-gray-600 leading-relaxed">

@@ -20,7 +20,7 @@ import Step5Mashing from "@/components/steps/Step5Mashing";
 import Step6Fermentation from "@/components/steps/Step6Fermentation";
 import Step7Conditioning from "@/components/steps/Step7Conditioning";
 import Step8Summary from "@/components/steps/Step8Summary";
-import { hygieneChecklist } from "@/data/hygieneChecklist";
+// hygieneChecklist removed: checklist is now informational inside its component
 import { useState, useRef, useMemo } from "react";
 
 /**
@@ -104,47 +104,8 @@ export default function Wizard() {
   const prevStep = useRef(currentStep);
   const [showErrors, setShowErrors] = useState(false);
   const [showRiskPanel, setShowRiskPanel] = useState(false);
-  const [hygieneError, setHygieneError] = useState<string | null>(null);
 
-  /** Vérifie si tous les items d'hygiène de l'étape courante sont cochés */
-  const hygieneStatus = useMemo(() => {
-    const hygieneStepId = stepIdMap[currentStep];
-    if (!hygieneStepId) return { required: false, allChecked: true, total: 0, checked: 0 };
-
-    const stepChecklist = hygieneChecklist.find((s) => s.stepId === hygieneStepId);
-    if (!stepChecklist) return { required: false, allChecked: true, total: 0, checked: 0 };
-
-    // Filtrer les items selon l'état de la recette (même logique que HygieneChecklist)
-    const hasChiller = recipe.profile.selectedEquipment.some((id) => {
-      const eq = equipmentData.find((e) => e.id === id);
-      return eq?.category === "refroidissement";
-    });
-    const hasTempControl = recipe.profile.selectedEquipment.some((id) => {
-      const eq = equipmentData.find((e) => e.id === id);
-      return eq?.category === "température";
-    });
-    const packagingType = recipe.conditioning.mode;
-
-    const filteredItems = stepChecklist.items.filter((item) => {
-      if (!item.appliesWhen) return true;
-      const aw = item.appliesWhen;
-      if (aw.packagingType && aw.packagingType !== packagingType) return false;
-      if (aw.hasChiller !== undefined && aw.hasChiller !== hasChiller) return false;
-      if (aw.hasTempControl !== undefined && aw.hasTempControl !== hasTempControl) return false;
-      return true;
-    });
-
-    if (filteredItems.length === 0) return { required: false, allChecked: true, total: 0, checked: 0 };
-
-    const checkedCount = filteredItems.filter((item) => assistant.hygieneChecks[item.id]).length;
-
-    return {
-      required: true,
-      allChecked: checkedCount === filteredItems.length,
-      total: filteredItems.length,
-      checked: checkedCount,
-    };
-  }, [currentStep, assistant.hygieneChecks, recipe, equipmentData]);
+  
 
   if (!dataLoaded) {
     return (
@@ -175,30 +136,18 @@ export default function Wizard() {
     prevStep.current = currentStep;
     setCurrentStep(step);
     setShowErrors(false);
-    setHygieneError(null);
   }
 
   function handleNext() {
     // Validation classique d'abord
     if (!isCurrentStepValid) {
       setShowErrors(true);
-      setHygieneError(null);
       return;
     }
-    // Validation hygiène ensuite
-    if (hygieneStatus.required && !hygieneStatus.allChecked) {
-      setHygieneError(
-        `Veuillez cocher tous les points d'hygiène avant de continuer (${hygieneStatus.checked}/${hygieneStatus.total} cochés).`
-      );
-      setShowErrors(false);
-      return;
-    }
-    setHygieneError(null);
     goTo(currentStep + 1);
   }
 
   function handlePrev() {
-    setHygieneError(null);
     goTo(currentStep - 1);
   }
 
@@ -323,27 +272,7 @@ export default function Wizard() {
                 <ValidationErrors errors={currentValidation.errors} />
               )}
 
-              {/* Erreur hygiène */}
-              <AnimatePresence>
-                {hygieneError && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 p-3 bg-teal-50 border-2 border-teal-300 rounded-xl flex items-start gap-2"
-                  >
-                    <span className="text-teal-600 text-lg mt-0.5">🧹</span>
-                    <div>
-                      <p className="text-sm font-semibold text-teal-800">
-                        Points d&apos;hygiène incomplets
-                      </p>
-                      <p className="text-xs text-teal-700 mt-0.5">
-                        {hygieneError}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* La checklist d'hygiène est uniquement informative ; plus d'erreur bloquante */}
             </motion.div>
           </AnimatePresence>
 
@@ -368,15 +297,6 @@ export default function Wizard() {
               <span className="text-xs text-gray-400 font-medium">
                 {currentStep + 1} / {totalSteps}
               </span>
-              {hygieneStatus.required && (
-                <span
-                  className={`text-[10px] mt-0.5 font-medium ${
-                    hygieneStatus.allChecked ? "text-teal-500" : "text-teal-400"
-                  }`}
-                >
-                  🧹 {hygieneStatus.checked}/{hygieneStatus.total}
-                </span>
-              )}
             </div>
 
             <motion.button
@@ -387,7 +307,7 @@ export default function Wizard() {
               className={`nav-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                 currentStep === totalSteps - 1
                   ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-                  : !isCurrentStepValid || (hygieneStatus.required && !hygieneStatus.allChecked)
+                  : !isCurrentStepValid
                   ? "bg-gradient-to-r from-amber-300 to-amber-400 text-white cursor-pointer shadow-sm"
                   : "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-600 hover:to-amber-700 shadow-md shadow-amber-200"
               }`}
