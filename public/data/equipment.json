@@ -1,0 +1,240 @@
+[
+  {
+    "id": "kettle_10",
+    "name": "Cuve de brassage 10 L",
+    "category": "cuve",
+    "description": "Cuve de brassage pour petits volumes (10 L).",
+    "forPro": false
+  },
+  {
+    "id": "kettle_27",
+    "name": "Cuve de brassage 27 L",
+    "category": "cuve",
+    "description": "Cuve inox 27 L (type stérilisateur à bocaux détourné) pour brassin de 20 L.",
+    "forPro": false
+  },
+  {
+    "id": "kettle_50",
+    "name": "Cuve de brassage 50 L",
+    "category": "cuve",
+    "description": "Grande cuve pour brassins de 30–40 L.",
+    "forPro": false
+  },
+  {
+    "id": "kettle_100",
+    "name": "Cuve de brassage 100 L",
+    "category": "cuve",
+    "description": "Cuve professionnelle 100 L.",
+    "forPro": true
+  },
+  {
+    "id": "mash_tun",
+    "name": "Cuve d'empâtage (avec filtre)",
+    "category": "cuve",
+    "description": "Cuve isotherme avec faux-fond ou filtre pour l'empâtage.",
+    "forPro": false
+  },
+  {
+    "id": "fermenter_bucket",
+    "name": "Seau de fermentation",
+    "category": "fermenteur",
+    "description": "Seau plastique alimentaire avec barboteur (20–30 L).",
+    "forPro": false
+  },
+  {
+    "id": "fermenter_carboy",
+    "name": "Dame-jeanne en verre",
+    "category": "fermenteur",
+    "description": "Fermenteur en verre pour observer la fermentation.",
+    "forPro": false
+  },
+  {
+    "id": "fermenter_conical",
+    "name": "Fermenteur conique inox",
+    "category": "fermenteur",
+    "description": "Fermenteur conique professionnel avec vanne de soutirage.",
+    "forPro": true
+  },
+  {
+    "id": "fermenter_uni",
+    "name": "Unitank (fermenteur pressurisable)",
+    "category": "fermenteur",
+    "description": "Fermenteur pressurisable pour carbonatation en cuve.",
+    "forPro": true
+  },
+  {
+    "id": "thermometer",
+    "name": "Thermomètre",
+    "category": "mesure",
+    "description": "Thermomètre à sonde pour vérifier la température d'empâtage.",
+    "forPro": false
+  },
+  {
+    "id": "hydrometer",
+    "name": "Densimètre / Hydromètre",
+    "category": "mesure",
+    "description": "Permet de mesurer la densité du moût (OG/FG).",
+    "forPro": false
+  },
+  {
+    "id": "refractometer",
+    "name": "Réfractomètre",
+    "category": "mesure",
+    "description": "Mesure rapide de la densité avec quelques gouttes de moût.",
+    "forPro": false
+  },
+  {
+    "id": "ph_meter",
+    "name": "pH-mètre",
+    "category": "mesure",
+    "description": "Pour mesurer le pH de l'empâtage et ajuster l'eau.",
+    "forPro": false
+  },
+  {
+    "id": "chiller_immersion",
+    "name": "Refroidisseur à serpentin (immersion)",
+    "category": "refroidissement",
+    "description": "Serpentin en cuivre/inox à plonger dans le moût après ébullition.",
+    "forPro": false
+  },
+  {
+    "id": "chiller_counterflow",
+    "name": "Refroidisseur à contre-courant",
+    "category": "refroidissement",
+    "description": "Échangeur de chaleur professionnel pour refroidissement rapide.",
+    "forPro": true
+  },
+  {
+    "id": "chiller_plate",
+    "name": "Échangeur à plaques",
+    "category": "refroidissement",
+    "description": "Refroidissement très efficace pour grands volumes.",
+    "forPro": true
+  },
+  {
+    "id": "bottles_33",
+    "name": "Bouteilles 33 cL",
+    "category": "conditionnement",
+    "description": "Bouteilles en verre de 33 cL avec capsules.",
+    "forPro": false
+  },
+  {
+    "id": "bottles_75",
+    "name": "Bouteilles 75 cL",
+    "category": "conditionnement",
+    "description": "Bouteilles en verre de 75 cL (type champagne).",
+    "forPro": false
+  },
+  {
+    "id": "bottles_swing",
+    "name": "Bouteilles à bouchon mécanique (swing-top)",
+    "category": "conditionnement",
+    "description": "Bouteilles avec bouchon mécanique, pas besoin de capsuleuse.",
+    "forPro": false
+  },
+  {
+    "id": "capper",
+    "name": "Capsuleuse",
+    "category": "conditionnement",
+    "description": "Outil pour poser des capsules sur les bouteilles.",
+    "forPro": false
+  },
+  {
+    "id": "keg_19",
+    "name": "Fût Cornelius (19 L)",
+    "category": "conditionnement",
+    "description": "Fût en inox de 19 L pour carbonatation forcée.",
+    "forPro": false
+  },
+  {
+    "id": "co2_system",
+    "name": "Système CO₂ (bouteille + détendeur)",
+    "category": "conditionnement",
+    "description": "Bouteille de CO₂ avec détendeur pour carbonatation forcée.",
+    "forPro": false
+  },
+  {
+    "id": "sanitizer",
+    "name": "Désinfectant (ChemiPro, StarSan)",
+    "category": "accessoire",
+    "description": "Produit désinfectant sans rinçage pour tout le matériel en contact avec le moût.",
+    "forPro": false
+  },
+  {
+    "id": "mash_paddle",
+    "name": "Fourquet / Cuillère de brassage",
+    "category": "accessoire",
+    "description": "Grande cuillère ou fourquet pour remuer le moût pendant l'empâtage.",
+    "forPro": false
+  },
+  {
+    "id": "airlock",
+    "name": "Barboteur",
+    "category": "accessoire",
+    "description": "Permet au CO₂ de s'échapper du fermenteur sans laisser entrer l'air.",
+    "forPro": false
+  },
+  {
+    "id": "bottling_bucket",
+    "name": "Seau d'embouteillage avec robinet",
+    "category": "conditionnement",
+    "description": "Seau avec robinet pour faciliter le remplissage des bouteilles.",
+    "forPro": false
+  },
+  {
+    "id": "caps_26mm",
+    "name": "Capsules 26 mm",
+    "category": "conditionnement",
+    "description": "Capsules couronne 26 mm standard pour bouteilles de bière.",
+    "forPro": false
+  },
+  {
+    "id": "pump",
+    "name": "Pompe de transfert",
+    "category": "accessoire",
+    "description": "Pompe pour transférer le moût entre les cuves.",
+    "forPro": false
+  },
+  {
+    "id": "grain_mill",
+    "name": "Moulin à malt",
+    "category": "accessoire",
+    "description": "Moulin à rouleaux pour concasser le malt.",
+    "forPro": false
+  },
+  {
+    "id": "auto_siphon",
+    "name": "Siphon automatique",
+    "category": "accessoire",
+    "description": "Pour soutirer la bière sans aspirer le dépôt.",
+    "forPro": false
+  },
+  {
+    "id": "heating_belt",
+    "name": "Ceinture chauffante",
+    "category": "température",
+    "description": "Bande chauffante à enrouler autour du fermenteur pour maintenir la température.",
+    "forPro": false
+  },
+  {
+    "id": "fridge",
+    "name": "Réfrigérateur / Chambre froide",
+    "category": "température",
+    "description": "Pour contrôler la température de fermentation.",
+    "forPro": false
+  },
+  {
+    "id": "temp_controller",
+    "name": "Contrôleur de température (Inkbird, etc.)",
+    "category": "température",
+    "description": "Thermostat pour réguler la température du frigo de fermentation.",
+    "forPro": false
+  },
+  {
+    "id": "brew_system",
+    "name": "Système de brassage tout-en-un (Grainfather, Brewzilla…)",
+    "category": "cuve",
+    "description": "Système automatisé avec chauffage, pompe et filtration intégrés.",
+    "forPro": false
+  }
+]

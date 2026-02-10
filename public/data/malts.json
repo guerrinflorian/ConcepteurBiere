@@ -1,0 +1,182 @@
+[
+  {
+    "id": "pilsner",
+    "name": "Malt Pilsner",
+    "type": "base",
+    "color_ebc": 3.5,
+    "potential_gravity": 1.037,
+    "description": "Malt de base clair, idéal pour les lagers et bières blondes. Saveur douce et maltée.",
+    "origin": "Europe"
+  },
+  {
+    "id": "pale_ale",
+    "name": "Malt Pale Ale",
+    "type": "base",
+    "color_ebc": 5.9,
+    "potential_gravity": 1.038,
+    "description": "Malt de base légèrement plus coloré que le Pilsner. Parfait pour les ales anglaises et américaines.",
+    "origin": "UK / USA"
+  },
+  {
+    "id": "vienna",
+    "name": "Malt Vienna",
+    "type": "base",
+    "color_ebc": 7,
+    "potential_gravity": 1.036,
+    "description": "Malt de base ambré apportant des notes de biscuit et de miel.",
+    "origin": "Autriche"
+  },
+  {
+    "id": "munich_light",
+    "name": "Malt Munich clair",
+    "type": "base",
+    "color_ebc": 15,
+    "potential_gravity": 1.035,
+    "description": "Apporte une couleur dorée à ambrée et des saveurs maltées riches.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "munich_dark",
+    "name": "Malt Munich foncé",
+    "type": "base",
+    "color_ebc": 25,
+    "potential_gravity": 1.034,
+    "description": "Version plus foncée du Munich, notes de croûte de pain et caramel.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "wheat",
+    "name": "Malt de blé (Wheat)",
+    "type": "base",
+    "color_ebc": 3.5,
+    "potential_gravity": 1.037,
+    "description": "Malt de blé pour les Weizen et Witbier. Apporte du corps et de la mousse.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "carapils",
+    "name": "Carapils (Dextrine)",
+    "type": "spécial",
+    "color_ebc": 3,
+    "potential_gravity": 1.033,
+    "description": "Malt cristal très clair. Améliore la tenue de mousse et le corps sans ajouter de couleur.",
+    "origin": "Europe"
+  },
+  {
+    "id": "cara20",
+    "name": "CaraMunich I (Crystal 20)",
+    "type": "cristal",
+    "color_ebc": 40,
+    "potential_gravity": 1.034,
+    "description": "Malt cristal clair apportant douceur, corps et une couleur dorée-ambrée.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "cara60",
+    "name": "CaraMunich II (Crystal 60)",
+    "type": "cristal",
+    "color_ebc": 120,
+    "potential_gravity": 1.034,
+    "description": "Malt cristal moyen avec des notes de caramel et toffee prononcées.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "cara120",
+    "name": "CaraMunich III (Crystal 120)",
+    "type": "cristal",
+    "color_ebc": 240,
+    "potential_gravity": 1.033,
+    "description": "Malt cristal foncé. Caramel intense, raisin sec, fruits noirs.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "special_b",
+    "name": "Special B",
+    "type": "cristal",
+    "color_ebc": 300,
+    "potential_gravity": 1.032,
+    "description": "Malt belge très foncé apportant des saveurs de raisin, prune et caramel brûlé.",
+    "origin": "Belgique"
+  },
+  {
+    "id": "biscuit",
+    "name": "Malt Biscuit",
+    "type": "spécial",
+    "color_ebc": 45,
+    "potential_gravity": 1.035,
+    "description": "Notes de biscuit et pain grillé. Utilisé en faible proportion pour la complexité.",
+    "origin": "Belgique"
+  },
+  {
+    "id": "aromatic",
+    "name": "Malt Aromatic",
+    "type": "spécial",
+    "color_ebc": 50,
+    "potential_gravity": 1.035,
+    "description": "Malt intensément malteux, arômes de croûte de pain. Parfait pour les bières belges.",
+    "origin": "Belgique"
+  },
+  {
+    "id": "melanoidin",
+    "name": "Malt Melanoidin",
+    "type": "spécial",
+    "color_ebc": 60,
+    "potential_gravity": 1.034,
+    "description": "Apporte des saveurs de miel et de biscuit. Simule une décoction en infusion simple.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "chocolate",
+    "name": "Malt Chocolat",
+    "type": "torréfié",
+    "color_ebc": 800,
+    "potential_gravity": 1.028,
+    "description": "Malt très torréfié aux arômes de cacao et café. Pour les porters et stouts.",
+    "origin": "UK"
+  },
+  {
+    "id": "black_malt",
+    "name": "Malt Black (Noir)",
+    "type": "torréfié",
+    "color_ebc": 1300,
+    "potential_gravity": 1.025,
+    "description": "Malt le plus foncé, saveurs de café torréfié et cendre. À utiliser avec parcimonie.",
+    "origin": "UK"
+  },
+  {
+    "id": "roasted_barley",
+    "name": "Orge torréfiée (Roasted Barley)",
+    "type": "torréfié",
+    "color_ebc": 1100,
+    "potential_gravity": 1.025,
+    "description": "Orge non maltée torréfiée. Donne la couleur noire et le goût café typique des stouts irlandais.",
+    "origin": "Irlande"
+  },
+  {
+    "id": "smoked",
+    "name": "Malt fumé (Rauchmalz)",
+    "type": "spécial",
+    "color_ebc": 6,
+    "potential_gravity": 1.037,
+    "description": "Malt fumé au bois de hêtre. Pour les Rauchbier et bières fumées.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "oats_flaked",
+    "name": "Flocons d'avoine",
+    "type": "adjunct",
+    "color_ebc": 2,
+    "potential_gravity": 1.033,
+    "description": "Apporte du soyeux, du corps et un aspect trouble. Utilisé dans les stouts et NEIPA.",
+    "origin": "Europe"
+  },
+  {
+    "id": "acidulated",
+    "name": "Malt acidulé (Sauermalz)",
+    "type": "spécial",
+    "color_ebc": 3,
+    "potential_gravity": 1.033,
+    "description": "Abaisse le pH de l'empâtage. Utilisé à 1-5% pour ajuster l'acidité.",
+    "origin": "Allemagne"
+  }
+]

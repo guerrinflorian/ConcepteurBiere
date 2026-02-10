@@ -1,0 +1,98 @@
+[
+  {
+    "id": "sugar_candi_white",
+    "name": "Sucre candi blanc",
+    "category": "sucre",
+    "gravity_contribution": 1.046,
+    "description": "Sucre cristallisé belge, augmente l'alcool sans ajouter de corps.",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "sugar_candi_brown",
+    "name": "Sucre candi brun",
+    "category": "sucre",
+    "gravity_contribution": 1.042,
+    "description": "Sucre candi foncé, apporte des arômes de caramel et de fruits secs.",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "lactose",
+    "name": "Lactose",
+    "category": "sucre",
+    "gravity_contribution": 1.043,
+    "description": "Sucre non fermentescible, ajoute du corps et de la rondeur (Milk Stout).",
+    "usage": "Ébullition"
+  },
+  {
+    "id": "honey",
+    "name": "Miel",
+    "category": "sucre",
+    "gravity_contribution": 1.035,
+    "description": "Apporte des arômes floraux et augmente l'alcool. Ajouter en fin d'ébullition.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "coffee",
+    "name": "Café (grains concassés)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Arômes de café torréfié. Ajouter en fermentation secondaire ou à froid.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "cacao",
+    "name": "Cacao (poudre ou fèves)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Arômes de chocolat. Utiliser des fèves torréfiées ou de la poudre non sucrée.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "vanilla",
+    "name": "Vanille (gousse)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Arômes doux et vanillés. Fendre la gousse et ajouter en secondaire.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "coriander",
+    "name": "Coriandre (graines)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Notes d'agrumes et d'épices, classique dans les bières blanches belges.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "orange_zest",
+    "name": "Zeste d'orange (curaçao / fraîche)",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Arômes d'agrumes, typique des Witbier et bières belges.",
+    "usage": "Fin d'ébullition"
+  },
+  {
+    "id": "red_fruits",
+    "name": "Fruits rouges (framboise, cerise, cassis)",
+    "category": "fruit",
+    "gravity_contribution": 1.005,
+    "description": "Arômes fruités intenses. Ajouter en fermentation secondaire pour préserver les arômes.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "tropical_fruits",
+    "name": "Fruits tropicaux (mangue, fruit de la passion)",
+    "category": "fruit",
+    "gravity_contribution": 1.005,
+    "description": "Arômes exotiques. Ajouter en purée en fermentation secondaire.",
+    "usage": "Fermentation secondaire"
+  },
+  {
+    "id": "ginger",
+    "name": "Gingembre frais",
+    "category": "épice",
+    "gravity_contribution": 1.0,
+    "description": "Notes piquantes et épicées. Râper et ajouter en fin d'ébullition.",
+    "usage": "Fin d'ébullition"
+  }
+]

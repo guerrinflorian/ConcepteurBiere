@@ -1,0 +1,162 @@
+[
+  {
+    "id": "saaz",
+    "name": "Saaz",
+    "alpha_acid": 3.5,
+    "type": "arôme",
+    "description": "Houblon noble tchèque. Arôme floral, épicé et herbacé. Emblématique des Pilsners.",
+    "origin": "République Tchèque"
+  },
+  {
+    "id": "hallertau",
+    "name": "Hallertau Mittelfrüh",
+    "alpha_acid": 4.0,
+    "type": "arôme",
+    "description": "Houblon noble allemand. Épicé, floral et légèrement fruité.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "tettnang",
+    "name": "Tettnang",
+    "alpha_acid": 4.5,
+    "type": "arôme",
+    "description": "Houblon noble allemand. Arôme délicat, floral et légèrement épicé.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "east_kent_goldings",
+    "name": "East Kent Goldings",
+    "alpha_acid": 5.0,
+    "type": "arôme",
+    "description": "Houblon anglais classique. Arôme floral, miel et terreux. Pour les ales anglaises.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "fuggles",
+    "name": "Fuggles",
+    "alpha_acid": 4.5,
+    "type": "arôme",
+    "description": "Houblon anglais traditionnel. Arôme boisé, herbacé et terreux.",
+    "origin": "Angleterre"
+  },
+  {
+    "id": "cascade",
+    "name": "Cascade",
+    "alpha_acid": 6.0,
+    "type": "mixte",
+    "description": "Houblon américain emblématique. Arôme d'agrumes (pamplemousse) et floral.",
+    "origin": "USA"
+  },
+  {
+    "id": "centennial",
+    "name": "Centennial",
+    "alpha_acid": 10.0,
+    "type": "mixte",
+    "description": "Houblon américain. Floral et agrumes avec une bonne amertume. Surnommé « Super Cascade ».",
+    "origin": "USA"
+  },
+  {
+    "id": "chinook",
+    "name": "Chinook",
+    "alpha_acid": 12.0,
+    "type": "amérisant",
+    "description": "Houblon américain à haute amertume. Notes de pin, épice et pamplemousse.",
+    "origin": "USA"
+  },
+  {
+    "id": "citra",
+    "name": "Citra",
+    "alpha_acid": 12.0,
+    "type": "arôme",
+    "description": "Houblon américain très aromatique. Fruit tropical, citron, litchi. Star des IPA modernes.",
+    "origin": "USA"
+  },
+  {
+    "id": "mosaic",
+    "name": "Mosaic",
+    "alpha_acid": 11.5,
+    "type": "arôme",
+    "description": "Houblon américain complexe. Mangue, agrumes, pin, terreux. Très polyvalent.",
+    "origin": "USA"
+  },
+  {
+    "id": "simcoe",
+    "name": "Simcoe",
+    "alpha_acid": 13.0,
+    "type": "mixte",
+    "description": "Houblon américain. Pin, fruit et terreux. Excellent en amérisant et en dry hop.",
+    "origin": "USA"
+  },
+  {
+    "id": "amarillo",
+    "name": "Amarillo",
+    "alpha_acid": 9.0,
+    "type": "arôme",
+    "description": "Houblon américain. Arôme d'orange et de fleurs avec une amertume douce.",
+    "origin": "USA"
+  },
+  {
+    "id": "columbus",
+    "name": "Columbus (CTZ)",
+    "alpha_acid": 15.0,
+    "type": "amérisant",
+    "description": "Houblon à haute teneur en alpha. Notes résineuses et terreuses. Idéal pour l'amertume.",
+    "origin": "USA"
+  },
+  {
+    "id": "magnum",
+    "name": "Magnum",
+    "alpha_acid": 14.0,
+    "type": "amérisant",
+    "description": "Houblon amérisant neutre et propre. Utilisé pour l'amertume de base dans de nombreux styles.",
+    "origin": "Allemagne"
+  },
+  {
+    "id": "northern_brewer",
+    "name": "Northern Brewer",
+    "alpha_acid": 8.5,
+    "type": "mixte",
+    "description": "Houblon polyvalent. Notes boisées et mentholées. Bon pour les ales et lagers.",
+    "origin": "Allemagne / USA"
+  },
+  {
+    "id": "styrian_goldings",
+    "name": "Styrian Goldings",
+    "alpha_acid": 5.5,
+    "type": "arôme",
+    "description": "Houblon slovène. Arôme délicat, épicé et légèrement fruité. Pour les ales belges.",
+    "origin": "Slovénie"
+  },
+  {
+    "id": "nelson_sauvin",
+    "name": "Nelson Sauvin",
+    "alpha_acid": 12.0,
+    "type": "arôme",
+    "description": "Houblon néo-zélandais unique. Arôme de raisin blanc, groseille et fruit de la passion.",
+    "origin": "Nouvelle-Zélande"
+  },
+  {
+    "id": "galaxy",
+    "name": "Galaxy",
+    "alpha_acid": 14.0,
+    "type": "arôme",
+    "description": "Houblon australien. Intense fruit de la passion, pêche et agrumes.",
+    "origin": "Australie"
+  },
+  {
+    "id": "strisselspalt",
+    "name": "Strisselspalt",
+    "alpha_acid": 3.5,
+    "type": "arôme",
+    "description": "Houblon alsacien noble. Arôme floral, herbacé et légèrement fruité. Pour les lagers françaises.",
+    "origin": "France"
+  },
+  {
+    "id": "barbe_rouge",
+    "name": "Barbe Rouge",
+    "alpha_acid": 8.0,
+    "type": "arôme",
+    "description": "Houblon français aromatique. Notes de petits fruits rouges (fraise, framboise).",
+    "origin": "France"
+  }
+]
